@@ -1,17 +1,4 @@
 <link rel="stylesheet" href="/css/style.css">
-<link rel="stylesheet" href="/css/galeri.css">
-<link rel="stylesheet" href="/css/lomba.css">
-<link rel="stylesheet" href="/css/pengaduan.css">
-<link rel="stylesheet" href="/css/pengumuman.css">
-<link rel="stylesheet" href="/css/profile.css">
-<link rel="stylesheet" href="/css/siswa.css">
-<link rel="stylesheet" href="/css/tautan.css">
-<link rel="stylesheet" href="/css/e-book.css">
-<link rel="stylesheet" href="/css/ekstrakulikuler.css">
-<link rel="stylesheet" href="/css/kaldik.css">
-<link rel="stylesheet" href="/css/kurikulum.css">
-<link rel="stylesheet" href="/css/media-pembelajaran.css">
-<link rel="stylesheet" href="/css/prestasi.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
 <div class="header">
   <div class="left">
