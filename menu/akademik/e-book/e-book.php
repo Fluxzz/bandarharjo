@@ -3,7 +3,7 @@ include('/bandarharjo/partials/header.php');
 include('/bandarharjo/koneksi.php');
 
 // Query untuk mengambil sambutan kepala sekolah
-$query = "SELECT * FROM sambutan WHERE id = 1";
+$query = "SELECT * FROM ebook";
 $result = $conn->query($query);
 
 // Cek apakah ada data
@@ -16,6 +16,7 @@ if ($result->num_rows > 0) {
 
 ?>
 
+<body>
 <div class="container">
 
 <div class="title">E-book</div>
@@ -116,6 +117,7 @@ if ($result->num_rows > 0) {
 
 </div>
 
+</body>
 
 <?php 
 include('/bandarharjo/partials/footer.php');
