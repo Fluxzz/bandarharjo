@@ -3,7 +3,7 @@ include('/bandarharjo/partials/header.php');
 include('/bandarharjo/koneksi.php');
 
 // Query untuk mengambil sambutan kepala sekolah
-$query = "SELECT * FROM sambutan WHERE id = 1";
+$query = "SELECT * FROM lomba";
 $result = $conn->query($query);
 
 // Cek apakah ada data
