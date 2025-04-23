@@ -1,0 +1,195 @@
+  /* Container utama */
+  .container {
+    padding: 20px 100px;
+  }
+  
+  .navigation {
+    background-color: whitesmoke;
+    border-radius: 15px;
+    padding: 10px 20px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    width: 35%;
+    box-shadow: -6px 7px 5px -1px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: -6px 7px 5px -1px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: -6px 7px 5px -1px rgba(0, 0, 0, 0.3);
+  }
+  .nav-underline {
+    width: 100%;
+    height: 2px;
+    background-color: gray;
+    margin-bottom: 10px;
+  }
+  .navigation .title {
+    text-align: center;
+    font-size: 10px;
+  }
+  .selection {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+  }
+  .option {
+    display: flex;
+    text-align: center;
+    margin: auto;
+    background-color: white;
+    border-radius: 10px;
+    padding: 0 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: -6px 7px 5px -1px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: -6px 7px 5px -1px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: -6px 7px 5px -1px rgba(0, 0, 0, 0.3);
+    position: relative;
+  }
+  .option p {
+    text-align: center;
+    font-weight: bold;
+    font-size: 10px;
+  }
+  .option.active {
+    background-color: #1e5ad7;
+    color: white;
+  }
+  .option.active::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50%;
+    height: 5px;
+    background-color: #1e5ad7;
+    border-radius: 10px;
+  }
+  
+  .card-slider {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    gap: 1rem;
+    scrollbar-width: none; /* Firefox */
+  }
+  
+  .card-slider::-webkit-scrollbar {
+    display: none; /* Chrome */
+  }
+
+
+
+
+/* Wrapper luar */
+.slider-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #ddd;
+    border-radius: 15px;
+    padding: 2rem;
+    max-width: 1000px;
+    margin: 50px auto;
+    background: white;
+    position: relative; /* penting! agar tombol bisa diposisikan absolut */
+  }
+  /* Tombol panah (revisi) */
+  .nav-button {
+    background-color: #1f6cd9;
+    color: white;
+    border: none;
+    font-size: 20px;
+    border-radius: 15px;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    box-shadow: -6px 7px 5px -1px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: -6px 7px 5px -1px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: -6px 7px 5px -1px rgba(0, 0, 0, 0.3);
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .nav-button:hover {
+    background-color: #144bb2;
+  }
+  
+  .nav-button.left {
+    left: -25px; /* posisi ke kiri keluar dari border */
+  }
+  
+  .nav-button.right {
+    right: -25px; /* posisi ke kanan keluar dari border */
+  }
+  
+  /* Container Card */
+  .card-container {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    gap: 30px; /* opsional agar antar card ada jarak */
+    padding: 20px;
+    overflow: hidden;
+  }
+  
+  
+  /* Card */
+  .card {
+    background: #f9f9f9;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: -6px 7px 5px -1px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: -6px 7px 5px -1px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: -6px 7px 5px -1px rgba(0, 0, 0, 0.3);
+    width: 220px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* Video Placeholder */
+  .video-placeholder {
+    width: 220px;
+    height: 150px;
+    background-color: #d9d9d9;
+    border-radius: 12px;
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    color: #222;
+  }
+  
+  /* Footer card */
+  .card-footer {
+    width: 100%;
+    padding: 0.75rem 1rem 1rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  /* Tombol selengkapnya */
+  .btn-selengkapnya {
+    background-color: #396cba;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 12px;
+    padding: 4px 8px;
+    cursor: pointer;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-desc {
+    font-size: 14px;
+    color: #333;
+  }
