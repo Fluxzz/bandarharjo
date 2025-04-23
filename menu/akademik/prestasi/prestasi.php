@@ -5,6 +5,7 @@ include('/bandarharjo/koneksi.php');
 
 ?>
 
+<link rel="stylesheet" href="/css/prestasi.css">
 
 <body>
 <div class="container">

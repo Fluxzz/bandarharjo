@@ -1,20 +1,8 @@
 <?php 
 include('/bandarharjo/partials/header.php');
-include('/bandarharjo/koneksi.php');
-
-// Query untuk mengambil sambutan kepala sekolah
-$query = "SELECT * FROM ekstrakurikuler";
-$result = $conn->query($query);
-
-// Cek apakah ada data
-if ($result->num_rows > 0) {
-    $data = $result->fetch_assoc();
-} else {
-    echo "Data sambutan tidak ditemukan.";
-    exit;
-}
-
 ?>
+
+<link rel="stylesheet" href="/css/ekstrakulikuler.css">
 
 <body>
 <div class="container">

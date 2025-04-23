@@ -16,6 +16,8 @@ if ($result->num_rows > 0) {
 
 ?>
 
+<link rel="stylesheet" href="/css/e-book.css">
+
 <body>
 <div class="container">
 
