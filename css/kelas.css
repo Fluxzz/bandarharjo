@@ -1,0 +1,320 @@
+.container {
+  padding: 20px 100px;
+}
+
+.navigation {
+  background-color: whitesmoke;
+  border-radius: 15px;
+  padding: 10px 20px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: 35%;
+  box-shadow: -6px 7px 5px -1px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: -6px 7px 5px -1px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: -6px 7px 5px -1px rgba(0, 0, 0, 0.3);
+}
+.nav-underline {
+  width: 100%;
+  height: 2px;
+  background-color: gray;
+  margin-bottom: 10px;
+}
+.navigation .title {
+  text-align: center;
+  font-size: 10px;
+}
+.selection {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+}
+.option {
+  display: flex;
+  text-align: center;
+  margin: auto;
+  background-color: white;
+  border-radius: 10px;
+  padding: 0 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: -6px 7px 5px -1px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: -6px 7px 5px -1px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: -6px 7px 5px -1px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+.option p {
+  text-align: center;
+  font-weight: bold;
+  font-size: 10px;
+}
+.option.active {
+  background-color: #1e5ad7;
+  color: white;
+}
+.option.active::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50%;
+  height: 5px;
+  background-color: #1e5ad7;
+  border-radius: 10px;
+}
+
+.table-container {
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  margin-bottom: 40px;
+  width: 80%;
+  margin-top: 40px;
+  background-color: whitesmoke;
+  padding: 60px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  box-shadow: -6px 7px 5px -1px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: -6px 7px 5px -1px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: -6px 7px 5px -1px rgba(0, 0, 0, 0.3);
+}
+table {
+  justify-content: center;
+  width: 60%;
+  background: white;
+  border-radius: 15px;
+  border: 1px solid gray;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: center;
+}
+th {
+  background-color: #e0e0e0;
+  font-weight: bold;
+  text-align: center;
+}
+
+.aksi-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.btn-edit {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-hapus {
+  margin-bottom: -15px;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-edit {
+  background-color: #4caf50; /* Hijau */
+  color: white;
+}
+
+.btn-edit:hover {
+  background-color: #45a049;
+}
+
+.btn-hapus {
+  background-color: #f44336; /* Merah */
+  color: white;
+}
+
+.btn-hapus:hover {
+  background-color: #d32f2f;
+}
+
+.btn-tambah {
+  padding: 8px 16px;
+  margin-bottom: 16px; /* Spasi antara tombol dan tabel */
+  border: none;
+  border-radius: 6px;
+  background-color: #2196f3; /* Biru */
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-tambah:hover {
+  background-color: #0b7dda;
+}
+
+.tambah-btn {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+}
+
+/* Responsif */
+@media (max-width: 768px) {
+  #addFormContainer form {
+    width: 90%; /* Lebar form lebih kecil di layar mobile */
+    padding: 15px;
+  }
+}
+
+/* Styling untuk input text dan label */
+input[type="text"] {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+input[type="text"]:focus {
+  border-color: #4caf50;
+  outline: none;
+}
+
+/* Label styling */
+label {
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 8px;
+  display: block;
+}
+
+/* Tombol untuk Menambah Data Siswa */
+.btn-submit:hover {
+  background-color: #45a049;
+}
+
+/* Submit button inside modal */
+.btn-submit {
+  background-color: #007bff;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+  margin-bottom: 5px;
+}
+
+.btn-submit:hover {
+  background-color: #0056b3;
+}
+
+/* Styling untuk Form Tambah Data */
+#addFormContainer {
+  display: flex;
+  justify-content: center; /* Posisikan form secara horizontal di tengah */
+  align-items: center; /* Posisikan form secara vertikal di tengah */
+  position: fixed; /* Agar form tetap di tengah meskipun halaman digulir */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Memberikan efek overlay transparan */
+  z-index: 1000; /* Agar form muncul di atas konten lainnya */
+}
+
+#addFormContainer h3 {
+  text-align: center; /* Posisikan teks di tengah */
+  margin-bottom: 20px; /* Memberikan sedikit jarak antara judul dan form */
+  font-size: 24px; /* Ukuran font judul */
+  color: #333; /* Warna teks judul */
+}
+
+#addFormContainer form {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  width: 100%; /* Lebar form menggunakan 100% agar lebih fleksibel */
+  box-sizing: border-box;
+  margin: 0 auto; /* Memastikan form tetap di tengah */
+}
+
+.close {
+  color: #aaa;
+  font-size: 28px;
+  font-weight: bold;
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: 10% auto;
+  padding: 30px;
+  border: 1px solid #ddd;
+  width: 60%; /* Lebar form modal */
+  max-width: 600px; /* Maksimal lebar modal */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  position: relative;
+  animation: slideIn 0.5s ease-out; /* Efek slideIn untuk munculnya modal */
+}
+
+/* Style untuk Modal (Popup) */
+.modal {
+  display: none; /* Sembunyikan modal secara default */
+  position: fixed;
+  z-index: 1; /* Di atas semua konten lainnya */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); /* Overlay transparan */
+  animation: fadeIn 0.3s ease-in-out; /* Animasi muncul modal */
+}
+
+.modal button {
+  background-color: #007bff;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+  margin-bottom: 5px;
+}
+
+.modal button:hover {
+  background-color: #0056b3;
+}
+
+/* Efek fadeIn untuk modal */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

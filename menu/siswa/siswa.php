@@ -1,151 +1,139 @@
-<?php 
+<?php
 include('/bandarharjo/partials/header.php');
 include('/bandarharjo/koneksi.php');
 
-// Query untuk mengambil sambutan kepala sekolah
-$query = "SELECT * FROM sambutan WHERE id = 1";
-$result = $conn->query($query);
-
-// Cek apakah ada data
-if ($result->num_rows > 0) {
-    $data = $result->fetch_assoc();
-} else {
-    echo "Data sambutan tidak ditemukan.";
-    exit;
-}
+// Ambil data sarana dari database
+$sql = "SELECT keterangan, jumlah FROM sarana";
+$result = $conn->query($sql);
 
 ?>
 
 <link rel="stylesheet" href="/css/siswa.css">
 
 <body>
-<div class="container">
 
-<div class="title">SISWA</div>
+    <?php
+    // Notifikasi jika berhasil menghapus
+    if (isset($_GET['status']) && $_GET['status'] === 'success') {
+        echo "<script>alert('Data berhasil dihapus!');</script>";
+    }
+    ?>
 
-<div class="card-container">
-    <a href="/siswa/kelas.html">
-        <div class="card">
-            <img src="/assets/bandarharjo.jpeg" alt="Kelas 2">
-            <div class="card-text">
-                <span class="badge">SISWA</span>
-                <div class="class-name">KELAS 1</div>
-            </div>
+    <?php
+    if (isset($_GET['status']) && $_GET['status'] === 'added') {
+        echo "<script>alert('Data berhasil ditambahkan!');</script>";
+    }
+    ?>
+
+
+    <div class="container">
+
+        <div class="title">SISWA</div>
+
+        <div class="card-container">
+            <a href="/menu/siswa/kelas/kelas1.php">
+                <div class="card">
+                    <img src="/assets/bandarharjo.jpeg" alt="Kelas 2">
+                    <div class="card-text">
+                        <span class="badge">SISWA</span>
+                        <div class="class-name">KELAS 1</div>
+                    </div>
+                </div>
+            </a>
+
+            <a href="/menu/siswa/kelas/kelas2.php">
+                <div class="card">
+                    <img src="/assets/bandarharjo.jpeg" alt="Kelas 2">
+                    <div class="card-text">
+                        <span class="badge">SISWA</span>
+                        <div class="class-name">KELAS 2</div>
+                    </div>
+                </div>
+            </a>
+
+            <a href="/menu/siswa/kelas/kelas3.php">
+
+                <div class="card">
+                    <img src="/assets/bandarharjo.jpeg" alt="Kelas 2">
+                    <div class="card-text">
+                        <span class="badge">SISWA</span>
+                        <div class="class-name">KELAS 3</div>
+                    </div>
+                </div>
+            </a>
+
+            <a href="/menu/siswa/kelas/kelas4.php">
+                <div class="card">
+                    <img src="/assets/bandarharjo.jpeg" alt="Kelas 2">
+                    <div class="card-text">
+                        <span class="badge">SISWA</span>
+                        <div class="class-name">KELAS 4</div>
+                    </div>
+                </div>
+            </a>
+
+            <a href="/menu/siswa/kelas/kelas5.php">
+                <div class="card">
+                    <img src="/assets/bandarharjo.jpeg" alt="Kelas 2">
+                    <div class="card-text">
+                        <span class="badge">SISWA</span>
+                        <div class="class-name">KELAS 5</div>
+                    </div>
+                </div>
+            </a>
+
+            <a href="/menu/siswa/kelas/kelas6.php">
+                <div class="card">
+                    <img src="/assets/bandarharjo.jpeg" alt="Kelas 2">
+                    <div class="card-text">
+                        <span class="badge">SISWA</span>
+                        <div class="class-name">KELAS 6</div>
+                    </div>
+                </div>
+            </a>
+
         </div>
-    </a>
-    
-    <a href="/siswa/kelas.html">
-        <div class="card">
-            <img src="/assets/bandarharjo.jpeg" alt="Kelas 2">
-            <div class="card-text">
-                <span class="badge">SISWA</span>
-                <div class="class-name">KELAS 2</div>
+
+        <div class="title">SARANA PRASARANA</div>
+
+        <div class="table-container">
+            <div class="tambah-btn">
+                <a href="tambah-sarana.php"><button class="btn-tambah">Tambah Data Sarana</button></a>
             </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>KETERANGAN</th>
+                        <th>JUMLAH</th>
+                        <th>AKSI</th> <!-- Kolom aksi -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    if ($result && $result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            $keterangan = urlencode($row["keterangan"]); // agar aman di URL
+                            echo "<tr>";
+                            echo "<td>" . htmlspecialchars($row["keterangan"]) . "</td>";
+                            echo "<td>" . htmlspecialchars($row["jumlah"]) . "</td>";
+                            echo "<td>";
+                            echo "<a href='edit-sarana.php?keterangan=$keterangan'><button class='btn-edit'>Edit</button></a> ";
+                            echo "<a href='hapus-sarana.php?keterangan=$keterangan' onclick=\"return confirm('Yakin ingin menghapus data ini?');\"><button class='btn-hapus'>Hapus</button></a>";
+                            echo "</td>";
+                            echo "</tr>";
+                        }
+                    } else {
+                        echo "<tr><td colspan='3'>Data tidak ditemukan</td></tr>";
+                    }
+                    ?>
+                </tbody>
+            </table>
+
+
         </div>
-    </a>
-
-    <a href="/siswa/kelas.html">
-
-        <div class="card">
-            <img src="/assets/bandarharjo.jpeg" alt="Kelas 2">
-            <div class="card-text">
-                <span class="badge">SISWA</span>
-                <div class="class-name">KELAS 3</div>
-            </div>
-        </div>
-    </a>
-
-    <a href="/siswa/kelas.html">
-        <div class="card">
-            <img src="/assets/bandarharjo.jpeg" alt="Kelas 2">
-            <div class="card-text">
-                <span class="badge">SISWA</span>
-                <div class="class-name">KELAS 4</div>
-            </div>
-        </div>
-    </a>
-
-    <a href="/siswa/kelas.html">
-        <div class="card">
-            <img src="/assets/bandarharjo.jpeg" alt="Kelas 2">
-            <div class="card-text">
-                <span class="badge">SISWA</span>
-                <div class="class-name">KELAS 5</div>
-            </div>
-        </div>
-    </a>
-
-    <a href="/siswa/kelas.html">
-        <div class="card">
-            <img src="/assets/bandarharjo.jpeg" alt="Kelas 2">
-            <div class="card-text">
-                <span class="badge">SISWA</span>
-                <div class="class-name">KELAS 6</div>
-            </div>
-        </div>
-    </a>
-    
-</div>
-
-<div class="title">SARANA PRASARANA</div>
-
-<div class="table-container">
-    <table>
-        <thead>
-            <tr>
-                <th>KETERANGAN</th>
-                <th>JUMLAH</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>RUANG KELAS</td>
-                <td>12</td>
-            </tr>
-            <tr>
-                <td>R. KEPALA SEKOLAH</td>
-                <td>1</td>
-            </tr>
-            <tr>
-                <td>R. TAMU KEPALA SEKOLAH</td>
-                <td>1</td>
-            </tr>
-            <tr>
-                <td>RUANG GURU</td>
-                <td>1</td>
-            </tr>
-            <tr>
-                <td>PERPUSTAKAAN</td>
-                <td>1</td>
-            </tr>
-            <tr>
-                <td>R UKS</td>
-                <td>1</td>
-            </tr>
-            <tr>
-                <td>R. IBADAH (MUSHOLA)</td>
-                <td>1</td>
-            </tr>
-            <tr>
-                <td>KAMAR MANDI GURU</td>
-                <td>2</td>
-            </tr>
-            <tr>
-                <td>TOILET SISWA</td>
-                <td>5</td>
-            </tr>
-            <tr>
-                <td>KANTIN SEKOLAH</td>
-                <td>3</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-</div>
+    </div>
 </body>
 
-<script src="/js/pengumuman.js"></script>
+<script src="/js/siswa.js"></script>
 
-<?php 
-include('/bandarharjo/partials/footer.php');
-?>
+<?php include('/bandarharjo/partials/footer.php'); ?>

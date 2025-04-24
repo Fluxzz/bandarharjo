@@ -1,16 +1,13 @@
 <?php
-// Mengatur detail koneksi ke database
-$host = 'localhost'; // Ganti dengan host database Anda
-$username = 'root';  // Ganti dengan username database Anda
-$password = '';      // Ganti dengan password database Anda
-$database = 'bandarharjo2'; // Nama database Anda
+$host = "localhost";
+$user = "root";
+$pass = ""; // sesuaikan password
+$db   = "bandarharjo"; // ganti dengan nama database kamu
 
-// Membuat koneksi ke database
-$conn = new mysqli($host, $username, $password, $database);
+$conn = new mysqli($host, $user, $pass, $db);
 
-// Mengecek apakah koneksi berhasil
+// Cek koneksi
 if ($conn->connect_error) {
     die("Koneksi gagal: " . $conn->connect_error);
 }
-//echo "Koneksi berhasil"; // Opsional, untuk memastikan koneksi berhasil
 ?>

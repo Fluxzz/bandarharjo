@@ -69,6 +69,8 @@
   }
   
   .table-container {
+    flex-direction: column;
+    align-items: center;
     margin: auto;
     margin-bottom: 40px;
     width: 80%;
@@ -83,6 +85,7 @@
     -moz-box-shadow: -6px 7px 5px -1px rgba(0,0,0,0.3);
   }
   table {
+    justify-content: center;
     width: 60%;
     background: white;
     border-radius: 15px;
@@ -114,3 +117,54 @@
     text-decoration: none;
     color: black;
   }
+
+
+  .btn-edit, .btn-hapus {
+    padding: 6px 12px;
+    margin: 2px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-edit {
+    background-color: #4CAF50; /* Hijau */
+    color: white;
+}
+
+.btn-edit:hover {
+    background-color: #45a049;
+}
+
+.btn-hapus {
+    background-color: #f44336; /* Merah */
+    color: white;
+}
+
+.btn-hapus:hover {
+    background-color: #d32f2f;
+}
+
+.btn-tambah {
+  padding: 8px 16px;
+  margin-bottom: 16px; /* Spasi antara tombol dan tabel */
+  border: none;
+  border-radius: 6px;
+  background-color: #2196F3; /* Biru */
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-tambah:hover {
+  background-color: #0b7dda;
+}
+
+.tambah-btn{
+  display: flex;
+  justify-content: center;
+  margin: auto;
+}
