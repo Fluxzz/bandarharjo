@@ -1,23 +1,47 @@
-// Fungsi untuk menampilkan form edit di dalam modal
+// --- Sambutan Kepala Sekolah ---
+// Ambil elemen tombol dan popup
+const editBtn = document.getElementById('edit-btn');
+const popupForm = document.getElementById('popupForm');
+const closePopup = document.getElementById('close-popup');
+
+// Saat tombol "Edit" diklik, tampilkan popup
+if (editBtn && popupForm) {
+  editBtn.addEventListener('click', () => {
+    popupForm.style.display = 'flex';
+  });
+}
+
+// Saat tombol "Kembali" diklik, sembunyikan popup
+if (closePopup && popupForm) {
+  closePopup.addEventListener('click', () => {
+    popupForm.style.display = 'none';
+  });
+}
+
+
+// --- Edit Data Siswa ---
 function showEditForm(nama, nisn) {
+  const editModal = document.getElementById("editModal");
+  const editForm = document.getElementById("edit-form");
+  if (editModal && editForm) {
     document.getElementById("editNama").value = nama;
     document.getElementById("editNISN").value = nisn;
-    document.getElementById("nisnLama").value = nisn; // Simpan NISN lama untuk update
-    document.getElementById("editModal").style.display = "block"; // Tampilkan modal
-    document.getElementById('edit-form').style.display = 'block';
-    
+    document.getElementById("nisnLama").value = nisn;
+    editModal.style.display = "block";
+    editForm.style.display = "block";
+  }
 }
 
-// Fungsi untuk menyembunyikan modal
 function hideEditForm() {
-    document.getElementById("editModal").style.display = "none"; // Sembunyikan modal
-    document.getElementById('edit-form').style.display = 'none';
+  const editModal = document.getElementById("editModal");
+  const editForm = document.getElementById("edit-form");
+  if (editModal && editForm) {
+    editModal.style.display = "none";
+    editForm.style.display = "none";
+  }
 }
 
-        // Fungsi untuk menampilkan form edit
-       
-
-        // Fungsi untuk menutup form edit
-        function closeEditForm() {
-            
-        }
+// Alias untuk closeEditForm jika dibutuhkan
+function closeEditForm() {
+  hideEditForm();
+}
