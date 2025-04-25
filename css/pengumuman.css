@@ -105,10 +105,9 @@
   
   .card .card-text {
     display: flex;
-    margin: 10px 0 0 15px;
+    flex-direction: column;
     text-align: center;
     align-items: center;
-    flex-direction: row;
   }
   
   .badge {
@@ -160,10 +159,9 @@
     flex: 1;
   }
   
-  .mpls-card-content h3 {
+  h3 {
     font-size: 1.1rem;
     font-weight: 700;
-    margin: 0 0 10px 0;
   }
   
   .mpls-card-content .underline {
@@ -174,7 +172,7 @@
     opacity: 0.2;
   }
   
-  .mpls-card-content .btn {
+   .btn {
     background-color: #f0f0f0;
     color: #bbb;
     border: none;
@@ -187,7 +185,7 @@
     transition: background-color 0.3s;
   }
   
-  .mpls-card-content .btn:hover {
+.btn:hover {
     background-color: #e0e0e0;
   }
   
@@ -235,7 +233,6 @@
   .berita-content h3 {
     font-size: 1.1rem;
     font-weight: 700;
-    margin: 0 0 10px 0;
   }
   
   .berita-content .underline {
@@ -263,37 +260,160 @@
     background-color: #e0e0e0;
   }
   
-  
 
 
 
-  .pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.5rem;
-    margin-top: 2rem;
-  }
+
   
-  .pagination button {
-    border: none;
-    background-color: transparent;
-    font-size: 0.9rem;
-    cursor: pointer;
-    color: #555;
-  }
-  
-  .pagination .page {
-    width: 32px;
-    height: 32px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 8px;
-    background-color: #e0e0e0;
-  }
-  
-  .pagination .active {
-    background-color: #407bff;
-    color: white;
-  }
+.delete-btn {
+  background: crimson;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  width: fit-content;
+  height: fit-content;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 25px;
+  text-align: center;
+  padding: 2px 30px;
+  margin-top: 10px;
+}
+
+.delete-btn:hover {
+  background: darkred;
+}
+
+
+/* POPUP KONFIRMASI HAPUS */
+.delete-user {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4);
+  justify-content: center;
+  align-items: center;
+}
+
+.delete-popup {
+  background-color: #fff;
+  padding: 25px 30px;
+  border-radius: 10px;
+  max-width: 350px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+  animation: fadeIn 0.3s ease;
+}
+
+.delete-popup p {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.delete-popup .cancel,
+.delete-popup .confirm {
+  padding: 10px 20px;
+  margin: 0 10px;
+  border-radius: 6px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.delete-popup .cancel {
+  background-color: #ccc;
+  color: #333;
+}
+
+.delete-popup .confirm {
+  background-color: crimson;
+  color: white;
+}
+
+.delete-popup .cancel:hover {
+  background-color: #aaa;
+}
+
+.delete-popup .confirm:hover {
+  background-color: darkred;
+}
+
+.add-announcement {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.add-announcement .btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+  font-size: 16px;
+}
+
+.add-announcement .btn:hover {
+  background-color: #45a049;
+}
+
+
+
+
+
+.add-form {
+  width: 50%;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+.btn-submit {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.btn-submit:hover {
+  background-color: #45a049;
+}
