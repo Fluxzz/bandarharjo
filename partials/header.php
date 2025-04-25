@@ -32,7 +32,7 @@
                 </ul>
             </li>
             <li><a href="/menu/lomba/lomba.php">LOMBA</a></li>
-            <li><a href="/menu/galeri/galeri.php">GALERI</a></li>
+            <li><a href="/menu/galeri/galery.php">GALERI</a></li>
             <li><a href="/menu/pengumuman/pengumuman.php">PENGUMUMAN</a></li>
             <li><a href="/menu/tautan/tautan.php">TAUTAN</a></li>
             <li><a href="/menu/siswa/siswa.php">SISWA</a></li>

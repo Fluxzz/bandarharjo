@@ -1,27 +1,15 @@
 <?php
 include('/bandarharjo/partials/header.php');
 include('/bandarharjo/koneksi.php');
-
 // Cek jika form disubmit
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nama = $_POST['nama'];
     $link = $_POST['link'];
-    
-    // Menangani upload foto
-    $foto = null;
-    if (isset($_FILES['foto']) && $_FILES['foto']['error'] == 0) {
-        $namaFile = $_FILES['foto']['name'];
-        $tmpFile = $_FILES['foto']['tmp_name'];
-        $foto = "/upload/" . $namaFile;
-
-        // Simpan file ke folder upload
-        move_uploaded_file($tmpFile, $_SERVER['DOCUMENT_ROOT'] . $foto);
-    }
 
     // Query untuk memasukkan data tautan
-    $query = "INSERT INTO tautan (nama, link, foto) VALUES (?, ?, ?)";
+    $query = "INSERT INTO tautan (nama, link) VALUES (?, ?)";
     $stmt = $conn->prepare($query);
-    $stmt->bind_param("sss", $nama, $link, $foto);
+    $stmt->bind_param("ss", $nama, $link);
 
     if ($stmt->execute()) {
         // Redirect ke halaman tautan setelah berhasil
@@ -123,7 +111,7 @@ button:hover {
     <div class="container">
         <div class="form-container">
             <h2>Tambah Tautan Baru</h2>
-            <form action="tambah-tautan.php" method="POST" enctype="multipart/form-data">
+            <form action="tambah-tautan.php" method="POST">
                 <div class="form-group">
                     <label for="nama">Nama Tautan</label>
                     <input type="text" id="nama" name="nama" required placeholder="Masukkan nama tautan">
@@ -131,10 +119,6 @@ button:hover {
                 <div class="form-group">
                     <label for="link">Link</label>
                     <input type="url" id="link" name="link" required placeholder="Masukkan URL tautan">
-                </div>
-                <div class="form-group">
-                    <label for="foto">Foto</label>
-                    <input type="file" id="foto" name="foto" accept="image/*">
                 </div>
                 <div class="form-actions">
                     <button type="submit">Tambah Tautan</button>

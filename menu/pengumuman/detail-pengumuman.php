@@ -24,7 +24,7 @@ if (isset($_GET['id'])) {
 <link rel="stylesheet" href="/css/detail-pengumuman.css">
 <body>
     <div class="detail-container">
-        <img src="/bandarharjo/upload/?php echo $data['foto']; ?>" alt="Gambar Pengumuman">
+    <img src="/bandarharjo/upload/?php echo $pengumuman['foto']; ?>" alt="Pengumuman Image">
         <h1><?php echo htmlspecialchars($data['judul']); ?></h1>
         <div class="isi">
             <?php echo $data['isi']; ?>
@@ -51,6 +51,7 @@ if (isset($_GET['id'])) {
     });
 </script>
 <script src="/js/pengumuman.js"></script>
+<script src="/js//nav.js"></script>
 
 <?php
 include('/bandarharjo/partials/footer.php');

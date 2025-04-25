@@ -1,208 +1,249 @@
+/* Container utama */
 .container {
-    padding: 20px 100px;
-  }
-  
-  .navigation {
-    background-color: whitesmoke;
-    border-radius: 15px;
-    padding: 10px 20px 20px 20px;
-    display: flex;
-    flex-direction: column;
-    margin: auto;
-    width: 35%;
-    box-shadow: -6px 7px 5px -1px rgba(0, 0, 0, 0.3);
-    -webkit-box-shadow: -6px 7px 5px -1px rgba(0, 0, 0, 0.3);
-    -moz-box-shadow: -6px 7px 5px -1px rgba(0, 0, 0, 0.3);
-  }
-  .nav-underline {
-    width: 100%;
-    height: 2px;
-    background-color: gray;
-    margin-bottom: 10px;
-  }
-  .navigation .title {
-    text-align: center;
-    font-size: 10px;
-  }
-  .selection {
-    display: flex;
-    justify-content: space-between;
-    text-align: center;
-  }
-  .option {
-    display: flex;
-    text-align: center;
-    margin: auto;
-    background-color: white;
-    border-radius: 10px;
-    padding: 0 10px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: -6px 7px 5px -1px rgba(0, 0, 0, 0.3);
-    -webkit-box-shadow: -6px 7px 5px -1px rgba(0, 0, 0, 0.3);
-    -moz-box-shadow: -6px 7px 5px -1px rgba(0, 0, 0, 0.3);
-    position: relative;
-  }
-  .option p {
-    text-align: center;
-    font-weight: bold;
-    font-size: 10px;
-  }
-  .option.active {
-    background-color: #1e5ad7;
-    color: white;
-  }
-  .option.active::after {
-    content: "";
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 50%;
-    height: 5px;
-    background-color: #1e5ad7;
-    border-radius: 10px;
-  }
-  
-  .prestasi-siswa {
-    max-width: 800px;
-    margin: 50px auto;
-    padding: 0 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-  .sang-juara {
-    width: fit-content;
-    display: flex;
-    justify-content: center;
-    gap: 70px;
-    padding: 50px;
-    flex-wrap: wrap;
-    margin-bottom: 40px;
-  }
-  
-  .card {
-    background: white;
-    padding: 15px;
-    border-radius: 20px;
-    text-align: center;
-    width: 300px;
-    position: relative;
-    box-shadow: -6px 7px 5px -1px rgba(0, 0, 0, 0.3);
-    -webkit-box-shadow: -6px 7px 5px -1px rgba(0, 0, 0, 0.3);
-    -moz-box-shadow: -6px 7px 5px -1px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s ease-in-out;
-  }
-  
-  .card:hover{
-      transform: scale(1.02);
-  }
-  .card img {
-    border: 3px solid rgba(0, 0, 0, 0.325);
-    width: 80%;
-    height: 180px;
-    background: #d3d3d3;
-    border-radius: 20px;
-  }
-  
-  .card .card-text {
-    display: flex;
-    margin: 10px 0 0 15px;
-    text-align: center;
-    align-items: center;
-    flex-direction: row;
-  }
-  
-  .badge {
-    display: flex;
-    background: #4979d1;
-    color: white;
-    font-size: 13px;
-    font-weight: bold;
-    padding: 4px 8px;
-    border-radius: 10px;
-  }
+  padding: 20px 100px;
+}
 
-  .prestasi-siswa .prestasi-card  {
-    background-color: #f9f9f9;
-    display: flex;
-    align-items: center;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-    gap: 20px;
-  }
-  
-  .prestasi-siswa .prestasi-card:hover{
-    transform: scale(1.01);
-  }
-  
-  .prestasi-card img {
-    width: 120px;
-    height: 120px;
-    object-fit: cover;
-    border-radius: 20px;
-    background-color: #407bff; /* Warna biru placeholder */
-  }
-  
-  .prestasi-card h3 {
-    font-size: 1.5rem;
-    font-weight: 700;
-  }
-  
-  .prestasi-card .btn {
-    background-color: #f0f0f0;
-    color: #bbb;
-    border: none;
-    border-radius: 999px;
-    padding: 8px 18px;
-    font-size: 0.95rem;
-    font-weight: 500;
-    cursor: pointer;
-    align-self: flex-start;
-    transition: background-color 0.3s;
-  }
-  
-  .prestasi-card .btn:hover {
-    background-color: #e0e0e0;
-  }
-  
-  .pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.5rem;
-    margin-top: 2rem;
-  }
-  
-  .pagination button {
-    border: none;
-    background-color: transparent;
-    font-size: 0.9rem;
-    cursor: pointer;
-    color: #555;
-  }
-  
-  .pagination .page {
-    width: 32px;
-    height: 32px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 8px;
-    background-color: #e0e0e0;
-  }
-  
-  .pagination .active {
-    background-color: #407bff;
-    color: white;
-  }
-  
-  .underline {
-    width: 100%;
-    height: 2px;
-    background-color: gray;
-    margin-bottom: 10px;
-  }
+/* NAVIGATION & TITLE */
+.navigation {
+  background-color: whitesmoke;
+  border-radius: 15px;
+  padding: 10px 20px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: 35%;
+  box-shadow: -6px 7px 5px -1px rgba(0, 0, 0, 0.3);
+}
+.nav-underline {
+  width: 100%;
+  height: 2px;
+  background-color: gray;
+  margin-bottom: 10px;
+}
+.navigation .title {
+  text-align: center;
+  font-size: 10px;
+}
+
+/* Kategori Pilihan */
+.selection {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+}
+.option {
+  display: flex;
+  text-align: center;
+  margin: auto;
+  background-color: white;
+  border-radius: 10px;
+  padding: 0 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: -6px 7px 5px -1px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+.option p {
+  text-align: center;
+  font-weight: bold;
+  font-size: 10px;
+}
+.option.active {
+  background-color: #1e5ad7;
+  color: white;
+}
+.option.active::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50%;
+  height: 5px;
+  background-color: #1e5ad7;
+  border-radius: 10px;
+}
+
+a{
+  text-decoration: none;
+}
+/* Styling bersama untuk .sang-juara dan .prestasi-siswa-siswa */
+.sang-juara,
+.prestasi-siswa{
+  width: fit-content;
+  display: flex;
+  justify-content: center;
+  gap: 70px;
+  padding: 50px;
+  flex-wrap: wrap;
+  margin: auto;
+  margin-bottom: 40px;
+}
+
+/* Card design */
+.card {
+  background: white;
+  padding: 15px;
+  border-radius: 20px;
+  text-align: center;
+  width: 300px;
+  position: relative;
+  box-shadow: -6px 7px 5px -1px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease-in-out;
+}
+.card:hover {
+  transform: scale(1.02);
+}
+.card img {
+  border: 3px solid rgba(0, 0, 0, 0.325);
+  width: 80%;
+  height: 180px;
+  background: #d3d3d3;
+  border-radius: 20px;
+}
+.card h3 {
+  margin: 15px 0 10px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #333;
+}
+.card .card-text {
+  display: flex;
+  margin: 10px 0 0 15px;
+  text-align: center;
+  align-items: center;
+  flex-direction: row;
+}
+.badge {
+  display: flex;
+  color: black;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 10px;
+}
+.underline {
+  width: 60%;
+  height: 2px;
+  background-color: #bbb;
+  margin: 10px auto;
+}
+
+/* Card Buttons */
+.card-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 10px;
+  text-align: center;
+}
+.card-actions a {
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  text-decoration: none;
+  color: white;
+  transition: background 0.3s ease-in-out;
+}
+.btn-edit {
+  background-color: #28a745;
+}
+.btn-edit:hover {
+  background-color: #218838;
+}
+.btn-hapus {
+  background-color: #dc3545;
+  width: 100%;
+}
+.btn-hapus:hover {
+  background-color: #c82333;
+}
+.btn-delete {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+.btn-delete:hover {
+  background-color: #c82333;
+}
+
+/* Tombol Tambah */
+.btn-tambah {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+  border-radius: 10px;
+}
+.btn-tambah:hover {
+  background-color: #45a049;
+}
+
+/* FORM POPUP */
+.popup-form {
+  display: none;
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.form-container {
+  background-color: #fff;
+  margin: 8% auto;
+  padding: 30px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 500px;
+  position: relative;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+.close {
+  color: #aaa;
+  font-size: 28px;
+  font-weight: bold;
+  position: absolute;
+  right: 20px;
+  top: 10px;
+  cursor: pointer;
+}
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+}
+.form-container input[type="text"],
+.form-container select,
+.form-container input[type="file"] {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.btn-submit {
+  width: 100%;
+  background-color: #28a745;
+  color: white;
+  padding: 12px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+}
+.btn-submit:hover {
+  background-color: #218838;
+}

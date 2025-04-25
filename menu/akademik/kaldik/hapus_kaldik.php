@@ -1,0 +1,54 @@
+<?php
+// Koneksi ke database
+include '/bandarharjo/koneksi.php';
+
+// Memastikan bahwa data ID dan file path diterima melalui POST
+if (isset($_POST['id']) && isset($_POST['file_path'])) {
+    $id = $_POST['id'];
+    $file_path = $_POST['file_path'];
+
+    // Menampilkan data untuk debugging
+    echo "ID yang diterima melalui POST: " . $id . "<br>";
+    echo "File yang diterima: " . $file_path . "<br>";
+
+    // Validasi ID
+    if (empty($id) || !is_numeric($id)) {
+        die("ID tidak valid: " . $id);
+    }
+
+    // Validasi file path
+    if (empty($file_path)) {
+        die("File path tidak valid.");
+    }
+
+    // Path lengkap ke file yang akan dihapus
+    $file_to_delete = "kaldik/file_kaldik" . $file_path;
+    echo "File yang akan dihapus: " . $file_to_delete . "<br>";
+
+    // Mengecek apakah file ada di path yang ditentukan
+    if (file_exists($file_to_delete)) {
+        if (unlink($file_to_delete)) {
+            echo "File berhasil dihapus.<br>";
+        } else {
+            echo "Gagal menghapus file.<br>";
+        }
+    } else {
+        echo "File tidak ditemukan di path: " . $file_to_delete . "<br>";
+    }
+
+    // Hapus data dari database
+    $sql = "DELETE FROM kaldik WHERE id = $id";
+    if (mysqli_query($conn, $sql)) {
+        echo "Data berhasil dihapus dari database.<br>";
+        // Setelah penghapusan, redirect ke halaman daftar kaldik
+        header("Location: kaldik.php");
+        exit();
+    } else {
+        echo "Gagal menghapus data: " . mysqli_error($conn) . "<br>";
+    }
+} else {
+    echo "Data tidak lengkap. ID atau file path tidak ditemukan.<br>";
+}
+
+$conn->close();
+?>
