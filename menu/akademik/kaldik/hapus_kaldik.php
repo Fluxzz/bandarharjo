@@ -1,6 +1,6 @@
 <?php
 // Koneksi ke database
-include '/bandarharjo/koneksi.php';
+include('../../../koneksi.php');
 
 // Memastikan bahwa data ID dan file path diterima melalui POST
 if (isset($_POST['id']) && isset($_POST['file_path'])) {
@@ -22,11 +22,13 @@ if (isset($_POST['id']) && isset($_POST['file_path'])) {
     }
 
     // Path lengkap ke file yang akan dihapus
-    $file_to_delete = "kaldik/file_kaldik" . $file_path;
+    $file_to_delete = "../../../kaldik/file_kaldik/" . $file_path;
     echo "File yang akan dihapus: " . $file_to_delete . "<br>";
 
     // Mengecek apakah file ada di path yang ditentukan
     if (file_exists($file_to_delete)) {
+        // Debugging: Pastikan unlink dijalankan
+        echo "File ditemukan, mencoba menghapus file...<br>";
         if (unlink($file_to_delete)) {
             echo "File berhasil dihapus.<br>";
         } else {

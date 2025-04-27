@@ -1,6 +1,6 @@
 <?php
-include '/bandarharjo/partials/header.php';
-include '/bandarharjo/koneksi.php';
+include('../../partials/header.php');
+include('../../koneksi.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Ambil dan sanitasi data dari form
@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $kategori = htmlspecialchars(trim($_POST['kategori']));
 
     // Proses upload foto
-    $targetDir = $_SERVER['DOCUMENT_ROOT'] . "/bandarharjo/upload/"; // Pastikan folder upload ada di sini
+    $targetDir = $_SERVER['DOCUMENT_ROOT'] . "../bandarharjo/upload/"; // Pastikan folder upload ada di sini
     $fileName = basename($_FILES["foto"]["name"]);
     $targetFile = $targetDir . $fileName;
     $uploadOk = 1;
@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <body>
     <div class="add-form">
         <h1>Tambah Pengumuman</h1>
-        <form action="" method="post" enctype="multipart/form-data">
+        <form action="tambah-pengumuman.php" method="post" enctype="multipart/form-data">
             <label>Judul:</label><br>
             <input type="text" name="judul" required><br><br>
 
@@ -90,5 +90,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
 </body>
 <?php
-include('/bandarharjo/partials/footer.php');
+include('../../partials/footer.php');
 ?>

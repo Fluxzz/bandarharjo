@@ -1,6 +1,6 @@
 <?php
-include '/bandarharjo/partials/header.php';
-include '/bandarharjo/koneksi.php';
+include('../../partials/header.php');
+include('../../koneksi.php');
 
 // Ambil ID dari URL
 if (isset($_GET['id'])) {
@@ -21,10 +21,10 @@ if (isset($_GET['id'])) {
     exit;
 }
 ?>
-<link rel="stylesheet" href="/css/detail-pengumuman.css">
+<link rel="stylesheet" href="../../css/detail-pengumuman.css">
 <body>
     <div class="detail-container">
-    <img src="/bandarharjo/upload/?php echo $pengumuman['foto']; ?>" alt="Pengumuman Image">
+    <img src="../../bandarharjo/upload/<?php echo $data['foto']; ?>" alt="Pengumuman Image">
         <h1><?php echo htmlspecialchars($data['judul']); ?></h1>
         <div class="isi">
             <?php echo $data['isi']; ?>
@@ -54,5 +54,5 @@ if (isset($_GET['id'])) {
 <script src="/js//nav.js"></script>
 
 <?php
-include('/bandarharjo/partials/footer.php');
+include('../../partials/footer.php');
 ?>

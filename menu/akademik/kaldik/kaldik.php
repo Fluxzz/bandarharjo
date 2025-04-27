@@ -1,16 +1,18 @@
 <?php
-include '/bandarharjo/partials/header.php';
-include '/bandarharjo/koneksi.php';
+include('../../../koneksi.php');
 
+// Menentukan kategori berdasarkan tab yang dipilih
+$kategori = isset($_GET['kategori']) ? $_GET['kategori'] : 'semarang'; // Default kategori semarang
 
-// Ambil data kaldik
-$sql = "SELECT * FROM kaldik ";
-$result = $conn->query($sql);
+// Ambil data kaldik berdasarkan kategori yang dipilih
+$sql = "SELECT * FROM kaldik WHERE kategori = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("s", $kategori); // Mengikat parameter kategori
+$stmt->execute();
+$result = $stmt->get_result();
 ?>
 
-
-
-<link rel="stylesheet" href="/menu/akademik/kaldik/css/kaldik.css">
+<link rel="stylesheet" href="css/kaldik.css">
 <body>
     
 <!-- Content -->
@@ -22,49 +24,70 @@ $result = $conn->query($sql);
             </div>
             <div class="nav-underline"></div>
             <div class="selection">
-                <div class="option active" onclick="switchTab(this, 'semarang')">
+                <!-- Tab KALDIK Kota Semarang -->
+                <div class="option <?= $kategori === 'semarang' ? 'active' : '' ?>" onclick="switchTab(this, 'semarang')">
                     <p>KALDIK KOTA SEMARANG</p>
                 </div>
-                <div class="option" onclick="switchTab(this, 'lokal')">
+                
+                <!-- Tab KALDIK SDN Bandarharjo -->
+                <div class="option <?= $kategori === 'sd' ? 'active' : '' ?>" onclick="switchTab(this, 'lokal')">
                     <p>KALDIK SDN BANDARHARJO 02</p>
                 </div>
             </div>
         </div>
 
         <button id="btnTambahKaldik" class="btn-tambah-kaldik">+ Tambah Kaldik</button>
-<div class="semarang-container" id="semarang-container">
-    <?php if ($result->num_rows > 0): ?>
-        <?php while($row = $result->fetch_assoc()): ?>
-            <div class="card">
-                <a href="<?= htmlspecialchars($row['file_kaldik']) ?>" target="_blank">
-                    <img src="/assets/calendar.jpg" alt="Kalender">
-                    <div class="card-text">
-                        <span class="badge">KALDIK Semarang <?= htmlspecialchars($row['tahun_ajaran']) ?></span>
+
+        <!-- Kategori Semarang -->
+        <div class="semarang-container" id="semarang-container" style="<?= $kategori === 'semarang' ? 'display:block' : 'display:none' ?>">
+            <?php if ($result->num_rows > 0): ?>
+                <?php while($row = $result->fetch_assoc()): ?>
+                    <div class="card">
+                        <a href="file_kaldik/<?= htmlspecialchars($row['file_kaldik']) ?>" target="_blank">
+                            <img src="assets/Kalender.jpg" alt="Kalender">
+                            <div class="card-text">
+                                <span class="badge">KALDIK Semarang <?= htmlspecialchars($row['tahun_ajaran']) ?></span>
+                            </div>
+                        </a>
+                        <!-- Tombol Hapus -->
+                        <form action="hapus_kaldik.php" method="POST" onsubmit="return confirm('Yakin ingin menghapus data ini?');">
+                            <input type="hidden" name="id" value="<?= htmlspecialchars($row['id']) ?>"> <!-- Pastikan id ini benar -->
+                            <input type="hidden" name="file_path" value="<?= htmlspecialchars($row['file_kaldik']) ?>"> <!-- Pastikan file path ini benar -->
+                            <button type="submit" class="btn-hapus">🗑 Hapus</button>
+                        </form>
                     </div>
-                </a>
-                <!-- Tombol Hapus -->
-                <!-- Tombol Hapus -->
-                <form action="hapus_kaldik.php" method="POST" onsubmit="return confirm('Yakin ingin menghapus data ini?');">
-                    <input type="hidden" name="id" value="<?= htmlspecialchars($row['id']) ?>"> <!-- Pastikan id ini benar -->
-                    <input type="hidden" name="file_path" value="<?= htmlspecialchars($row['file_kaldik']) ?>"> <!-- Pastikan file path ini benar -->
-                    <button type="submit" class="btn-hapus">🗑 Hapus</button>
-                </form>
-            </div>
-        <?php endwhile; ?>
-    <?php else: ?>
-        <p>Tidak ada data KALDIK tersedia.</p>
-    <?php endif; ?>
-</div>
-
-
-
-        <!-- Kaldik Lokal (opsional) -->
-        <div class="lokal-container" id="lokal-container" style="display: none;">
-            <p>Kaldik lokal belum tersedia.</p>
+                <?php endwhile; ?>
+            <?php else: ?>
+                <p>Tidak ada data KALDIK tersedia.</p>
+            <?php endif; ?>
         </div>
+
+        <!-- Kategori SDN Bandarharjo -->
+        <div class="lokal-container" id="lokal-container" style="<?= $kategori === 'sd' ? 'display:block' : 'display:none' ?>">
+            <?php if ($result->num_rows > 0): ?>
+                <?php while($row = $result->fetch_assoc()): ?>
+                    <div class="card">
+                        <a href="file_kaldik/<?= htmlspecialchars($row['file_kaldik']) ?>" target="_blank">
+                            <img src="assets/Kalender.jpg" alt="Kalender">
+                            <div class="card-text">
+                                <span class="badge">KALDIK SDN Bandarharjo <?= htmlspecialchars($row['tahun_ajaran']) ?></span>
+                            </div>
+                        </a>
+                        <!-- Tombol Hapus -->
+                        <form action="hapus_kaldik.php" method="POST" onsubmit="return confirm('Yakin ingin menghapus data ini?');">
+                            <input type="hidden" name="id" value="<?= htmlspecialchars($row['id']) ?>"> <!-- Pastikan id ini benar -->
+                            <input type="hidden" name="file_path" value="<?= htmlspecialchars($row['file_kaldik']) ?>"> <!-- Pastikan file path ini benar -->
+                            <button type="submit" class="btn-hapus">🗑 Hapus</button>
+                        </form>
+                    </div>
+                <?php endwhile; ?>
+            <?php else: ?>
+                <p>Tidak ada data KALDIK SDN Bandarharjo tersedia.</p>
+            <?php endif; ?>
+        </div>
+
     </div>
 </div>
-
 
 <!-- Popup Form -->
 <div id="popupFormKaldik" class="popup-form-kaldik">
@@ -74,6 +97,13 @@ $result = $conn->query($sql);
     <form action="tambah_kaldik.php" method="POST" enctype="multipart/form-data">
         <label for="tahun_ajaran">Tahun Ajaran:</label><br>
         <input type="text" id="tahun_ajaran" name="tahun_ajaran" placeholder="contoh: 2024/2025" required><br><br>
+
+        <!-- Pilihan Kategori -->
+        <label for="kategori">Kategori:</label><br>
+        <select id="kategori" name="kategori" required>
+            <option value="semarang">KALDIK KOTA SEMARANG</option>
+            <option value="sd">KALDIK SDN BANDARHARJO 02</option>
+        </select><br><br>
 
         <label for="file_kaldik">Upload File Kalender (PDF/Gambar):</label><br>
         <input type="file" id="file_kaldik" name="file_kaldik" accept=".pdf,image/*" required><br><br>
@@ -85,29 +115,35 @@ $result = $conn->query($sql);
 
 </body>
 
-<!-- Script -->
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const dropdownToggle = document.querySelector(".dropdown-toggle");
-      const dropdownMenu = document.querySelector(".dropdown-menu");
-
-      dropdownToggle.addEventListener("click", function (e) {
-        e.preventDefault();
-        dropdownMenu.style.display =
-          dropdownMenu.style.display === "block" ? "none" : "block";
-      });
-
-      document.addEventListener("click", function (e) {
-        if (!e.target.closest(".dropdown")) {
-          dropdownMenu.style.display = "none";
-        }
-      });
+    function switchTab(element, tab) {
+    var semarangContainer = document.getElementById('semarang-container');
+    var lokalContainer = document.getElementById('lokal-container');
+    
+    // Set active tab
+    var tabs = document.querySelectorAll('.option');
+    tabs.forEach(function(tabElement) {
+        tabElement.classList.remove('active');
     });
-  </script>
-<script src="/js/nav.js"></script>
-<script src="/menu/akademik/kaldik/js/tambah.js"></script>
-</html>
+    element.classList.add('active');
+
+    // Show selected category
+    if (tab === 'semarang') {
+        semarangContainer.style.display = 'block';
+        lokalContainer.style.display = 'none';
+        window.history.pushState(null, null, "?kategori=semarang"); // Update URL with semarang category
+    } else {
+        semarangContainer.style.display = 'none';
+        lokalContainer.style.display = 'block';
+        window.history.pushState(null, null, "?kategori=sd"); // Update URL with sd category
+    }
+}
+</script>
+
+<script src="js/nav.js"></script>
+<script src="js/tambah.js"></script>
+
 <?php $conn->close(); ?>
 <?php
-include('/bandarharjo/partials/footer.php');
+include('../../../partials/footer.php');
 ?>
