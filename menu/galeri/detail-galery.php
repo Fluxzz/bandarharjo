@@ -1,6 +1,6 @@
 <?php
-include('/bandarharjo/partials/header.php');
-include('/bandarharjo/koneksi.php');
+include('../../partials/header.php');
+include('../../koneksi.php');
 
 // Ambil ID dari URL
 if (isset($_GET['id'])) {
@@ -44,7 +44,7 @@ function convertYoutubeToEmbed($url) {
             <!-- Jika foto -->
             <?php elseif ($data['kategori'] == 'foto'): ?>
                 <div class="foto-container">
-                    <img src="<?= htmlspecialchars($data['foto']) ?>" alt="Foto Galeri" style="max-width: 100%;">
+                    <img src="../../upload/<?= htmlspecialchars($data['foto']) ?>" alt="Foto Galeri" style="max-width: 100%;">
                 </div>
                 <div class="title"><?= htmlspecialchars($data['judul']) ?></div>
                 <p><?= nl2br(htmlspecialchars($data['isi'])) ?></p>
@@ -72,9 +72,9 @@ function convertYoutubeToEmbed($url) {
         }
     });
 </script>
-<script src="/js/pengumuman.js"></script>
-<script src="/js/nav.js"></script>
+<script src="../../js/pengumuman.js"></script>
+<script src="../../js/nav.js"></script>
 
 <?php
-include('/bandarharjo/partials/footer.php');
+include('../../partials/footer.php');
 ?>

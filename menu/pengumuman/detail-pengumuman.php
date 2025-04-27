@@ -21,7 +21,7 @@ if (isset($_GET['id'])) {
     exit;
 }
 ?>
-<link rel="stylesheet" href="../css/detail-pengumuman.css">
+<link rel="stylesheet" href="../../css/detail-pengumuman.css">
 <body>
     <div class="detail-container">
     <img src="../../bandarharjo/upload/<?php echo $data['foto']; ?>" alt="Pengumuman Image">

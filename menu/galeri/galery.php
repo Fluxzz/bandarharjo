@@ -1,6 +1,6 @@
 <?php
-include('/bandarharjo/partials/header.php');
-include('/bandarharjo/koneksi.php');
+include('../../partials/header.php');
+include('../../koneksi.php');
 
 // Ambil data galeri
 $query = "SELECT * FROM galery ORDER BY id DESC";
@@ -20,7 +20,7 @@ function convertYoutubeToEmbed($url) {
 }
 ?>
 
-<link rel="stylesheet" href="/css/prestasi.css">
+<link rel="stylesheet" href="../../css/prestasi.css">
 
 <body>
   <div class="container">
@@ -44,7 +44,7 @@ function convertYoutubeToEmbed($url) {
 
     <!-- Tombol Tambah -->
     <div class="tambah-button-container">
-      <a href="/menu/galeri/tambah-galery.php">
+      <a href="../../menu/galeri/tambah-galery.php">
         <button class="btn-tambah">Tambah Galeri</button>
       </a>
     </div>
@@ -61,8 +61,8 @@ function convertYoutubeToEmbed($url) {
               <div class="card-text"><?= htmlspecialchars(substr($item['isi'], 0, 80)) ?>...</div>
 
               <div class="card-actions">
-                <a href="/menu/galeri/detail-galery.php?id=<?= $item['id'] ?>" class="btn-edit">Detail</a>
-                <a href="/menu/galeri/hapus-galery.php?id=<?= $item['id'] ?>" class="btn-hapus" onclick="return confirm('Yakin ingin menghapus video ini?')">Hapus</a>
+                <a href="detail-galery.php?id=<?= $item['id'] ?>" class="btn-edit">Detail</a>
+                <a href="hapus-galery.php?id=<?= $item['id'] ?>" class="btn-hapus" onclick="return confirm('Yakin ingin menghapus video ini?')">Hapus</a>
               </div>
             </div>
           <?php endif; ?>
@@ -76,14 +76,14 @@ function convertYoutubeToEmbed($url) {
         <?php foreach ($galeri as $item): ?>
           <?php if ($item['kategori'] == 'foto'): ?>
             <div class="card">
-              <img src="/bandarharjo/upload/<?= htmlspecialchars($item['foto']) ?>" alt="<?= htmlspecialchars($item['judul']) ?>">
+              <img src="../../upload/<?= htmlspecialchars($item['foto']) ?>" alt="<?= htmlspecialchars($item['judul']) ?>">
               <h3><?= htmlspecialchars($item['judul']) ?></h3>
               <div class="underline"></div>
               <div class="card-text"><?= htmlspecialchars(substr($item['isi'], 0, 80)) ?>...</div>
 
               <div class="card-actions">
-                <a href="/menu/galeri/detail-galery.php?id=<?= $item['id'] ?>" class="btn-edit">Detail</a>
-                <a href="/menu/galeri/hapus-galery.php?id=<?= $item['id'] ?>" class="btn-hapus" onclick="return confirm('Yakin ingin menghapus foto ini?')">Hapus</a>
+                <a href="detail-galery.php?id=<?= $item['id'] ?>" class="btn-edit">Detail</a>
+                <a href="hapus-galery.php?id=<?= $item['id'] ?>" class="btn-hapus" onclick="return confirm('Yakin ingin menghapus foto ini?')">Hapus</a>
               </div>
             </div>
           <?php endif; ?>
@@ -112,5 +112,5 @@ function convertYoutubeToEmbed($url) {
 </body>
 
 <?php
-include('/bandarharjo/partials/footer.php');
+include('../../partials/footer.php');
 ?>

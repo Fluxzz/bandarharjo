@@ -1,6 +1,6 @@
 <?php
-include '/bandarharjo/partials/header.php'; // koneksi database
-include '/bandarharjo/koneksi.php'; // koneksi database
+include '../../partials/header.php'; // koneksi database
+include '../../koneksi.php'; // koneksi database
 
 if (isset($_POST['submit'])) {
     $judul = $_POST['judul'];
@@ -11,7 +11,7 @@ if (isset($_POST['submit'])) {
 
     // Kalau upload foto
     if ($kategori == 'foto' && isset($_FILES['foto']) && $_FILES['foto']['error'] == 0) {
-        $folder = "upload/";
+        $folder = "../../upload/";
         $ext = pathinfo($_FILES['foto']['name'], PATHINFO_EXTENSION);
         $new_name = uniqid() . '.' . $ext; // Biar nama file unik, menghindari bentrok
         move_uploaded_file($_FILES['foto']['tmp_name'], $folder . $new_name);
@@ -26,12 +26,19 @@ if (isset($_POST['submit'])) {
 ?>
 
 <style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+        margin: 0;
+        padding: 0;
+    }
+
     .container {
         display: flex;
         justify-content: center;
         align-items: center;
         min-height: 100vh;
-        background-color: #f4f4f9;
+        padding: 20px;
     }
 
     .form-container {
@@ -39,11 +46,12 @@ if (isset($_POST['submit'])) {
         padding: 30px;
         border-radius: 8px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        width: 400px;
-        max-width: 100%;
+        width: 100%;
+        max-width: 600px;
+        box-sizing: border-box;
     }
 
-    form h2 {
+    .form-container h2 {
         text-align: center;
         margin-bottom: 20px;
         font-size: 24px;
@@ -79,7 +87,6 @@ if (isset($_POST['submit'])) {
     .form-actions {
         display: flex;
         justify-content: space-between;
-        align-items: center;
     }
 
     button {
@@ -90,6 +97,7 @@ if (isset($_POST['submit'])) {
         border-radius: 6px;
         cursor: pointer;
         font-size: 16px;
+        width: 48%;
     }
 
     button:hover {
@@ -104,7 +112,8 @@ if (isset($_POST['submit'])) {
         border-radius: 6px;
         cursor: pointer;
         font-size: 16px;
-        text-decoration: none;
+        width: 48%;
+        text-align: center;
     }
 
     .cancel-btn:hover {
@@ -114,37 +123,42 @@ if (isset($_POST['submit'])) {
 
 <body>
 <div class="container mt-4">
-    <h1 class="mb-4">Tambah Galeri</h1>
-    <form method="post" enctype="multipart/form-data">
-        <div class="mb-3">
-            <label>Judul</label>
-            <input type="text" name="judul" class="form-control" required>
-        </div>
-        <div class="mb-3">
-            <label>Isi</label>
-            <textarea name="isi" class="form-control" rows="5" required></textarea>
-        </div>
-        <div class="mb-3">
-            <label>Kategori</label>
-            <select name="kategori" class="form-control" required>
-                <option value="">-- Pilih --</option>
-                <option value="foto">Foto</option>
-                <option value="video">Video</option>
-            </select>
-        </div>
-        <div class="mb-3">
-            <label>Foto (Jika Kategori Foto)</label>
-            <input type="file" name="foto" class="form-control">
-        </div>
-        <div class="mb-3">
-            <label>URL Video (Jika Kategori Video)</label>
-            <input type="text" name="url_video" class="form-control">
-        </div>
-        <button type="submit" name="submit" class="btn btn-success">Simpan</button>
-    </form>
+    <div class="form-container">
+        <h2>Tambah Galeri</h2>
+        <form method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="judul">Judul</label>
+                <input type="text" name="judul" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="isi">Isi</label>
+                <textarea name="isi" class="form-control" rows="5" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="kategori">Kategori</label>
+                <select name="kategori" class="form-control" required>
+                    <option value="">-- Pilih --</option>
+                    <option value="foto">Foto</option>
+                    <option value="video">Video</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="foto">Foto (Jika Kategori Foto)</label>
+                <input type="file" name="foto" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="url_video">URL Video (Jika Kategori Video)</label>
+                <input type="text" name="url_video" class="form-control">
+            </div>
+            <div class="form-actions">
+                <button type="submit" name="submit" class="btn btn-success">Simpan</button>
+                <a href="galery.php" class="cancel-btn">Batal</a>
+            </div>
+        </form>
+    </div>
 </div>
 </body>
-<?php
-include '/bandarharjo/partials/footer.php'; // koneksi database
-?>
 
+<?php
+include '../../partials/footer.php'; // koneksi database
+?>
