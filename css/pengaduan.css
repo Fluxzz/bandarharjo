@@ -131,3 +131,22 @@
       width: 100%;
     }
   }
+
+  .submit-btn a.btn-daftar {
+    background-color: #f0ad4e;
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    margin-left: 10px;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .submit-btn a.btn-daftar:hover {
+    background-color: #ec971f;
+  }
+  

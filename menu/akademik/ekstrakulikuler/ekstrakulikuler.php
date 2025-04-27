@@ -1,5 +1,6 @@
 <?php 
 include('/bandarharjo/partials/header.php');
+include('/bandarharjo/koneksi.php');
 ?>
 
 <link rel="stylesheet" href="/css/ekstrakulikuler.css">
