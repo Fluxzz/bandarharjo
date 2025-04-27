@@ -1,8 +1,8 @@
 <?php
+session_start();
 include('../../partials/header.php');
 include('../../koneksi.php');
 
-// Ambil data galeri
 $query = "SELECT * FROM galery ORDER BY id DESC";
 $result = $conn->query($query);
 
@@ -13,7 +13,6 @@ if ($result->num_rows > 0) {
   }
 }
 
-// Fungsi konversi URL YouTube ke embed
 function convertYoutubeToEmbed($url) {
   preg_match("/(?:v=|\/embed\/|youtu.be\/)([^&\n?#]+)/", $url, $matches);
   return isset($matches[1]) ? "https://www.youtube.com/embed/" . $matches[1] : '';
@@ -42,12 +41,14 @@ function convertYoutubeToEmbed($url) {
       </div>
     </div>
 
-    <!-- Tombol Tambah -->
-    <div class="tambah-button-container">
-      <a href="../../menu/galeri/tambah-galery.php">
-        <button class="btn-tambah">Tambah Galeri</button>
-      </a>
-    </div>
+    <!-- Tombol Tambah (hanya admin) -->
+    <?php if (isset($_SESSION['role']) && $_SESSION['role'] == 'admin'): ?>
+      <div class="tambah-button-container">
+        <a href="../../menu/galeri/tambah-galery.php">
+          <button class="btn-tambah">Tambah Galeri</button>
+        </a>
+      </div>
+    <?php endif; ?>
 
     <!-- Galeri Video -->
     <div class="vidio-container" id="vidio-container">
@@ -62,7 +63,9 @@ function convertYoutubeToEmbed($url) {
 
               <div class="card-actions">
                 <a href="detail-galery.php?id=<?= $item['id'] ?>" class="btn-edit">Detail</a>
-                <a href="hapus-galery.php?id=<?= $item['id'] ?>" class="btn-hapus" onclick="return confirm('Yakin ingin menghapus video ini?')">Hapus</a>
+                <?php if (isset($_SESSION['role']) && $_SESSION['role'] == 'admin'): ?>
+                  <a href="hapus-galery.php?id=<?= $item['id'] ?>" class="btn-hapus" onclick="return confirm('Yakin ingin menghapus video ini?')">Hapus</a>
+                <?php endif; ?>
               </div>
             </div>
           <?php endif; ?>
@@ -83,7 +86,9 @@ function convertYoutubeToEmbed($url) {
 
               <div class="card-actions">
                 <a href="detail-galery.php?id=<?= $item['id'] ?>" class="btn-edit">Detail</a>
-                <a href="hapus-galery.php?id=<?= $item['id'] ?>" class="btn-hapus" onclick="return confirm('Yakin ingin menghapus foto ini?')">Hapus</a>
+                <?php if (isset($_SESSION['role']) && $_SESSION['role'] == 'admin'): ?>
+                  <a href="hapus-galery.php?id=<?= $item['id'] ?>" class="btn-hapus" onclick="return confirm('Yakin ingin menghapus foto ini?')">Hapus</a>
+                <?php endif; ?>
               </div>
             </div>
           <?php endif; ?>
@@ -92,25 +97,24 @@ function convertYoutubeToEmbed($url) {
     </div>
   </div>
 
-  <script>
-    function switchTab(element, target) {
-      const options = document.querySelectorAll('.option');
-      options.forEach(opt => opt.classList.remove('active'));
-      element.classList.add('active');
+<script>
+function switchTab(element, target) {
+  const options = document.querySelectorAll('.option');
+  options.forEach(opt => opt.classList.remove('active'));
+  element.classList.add('active');
 
-      const containers = document.querySelectorAll('.vidio-container, .foto-container');
-      containers.forEach(c => c.style.display = 'none');
-      document.getElementById(target).style.display = 'block';
-    }
+  const containers = document.querySelectorAll('.vidio-container, .foto-container');
+  containers.forEach(c => c.style.display = 'none');
+  document.getElementById(target).style.display = 'block';
+}
 
-    document.addEventListener("DOMContentLoaded", function () {
-      const activeTab = document.querySelector('.option.active');
-      const targetContainer = activeTab.getAttribute('onclick').match(/'([^']+)'/)[1];
-      switchTab(activeTab, targetContainer);
-    });
-  </script>
+document.addEventListener("DOMContentLoaded", function () {
+  const activeTab = document.querySelector('.option.active');
+  const targetContainer = activeTab.getAttribute('onclick').match(/'([^']+)'/)[1];
+  switchTab(activeTab, targetContainer);
+});
+</script>
+
 </body>
 
-<?php
-include('../../partials/footer.php');
-?>
+<?php include('../../partials/footer.php'); ?>
