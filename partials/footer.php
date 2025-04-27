@@ -1,11 +1,11 @@
-<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
 
 <footer>
         <div class="footer-container">
             <!-- Kiri (Logo + Alamat) -->
             <div class="footer-left">
-                <img class="footer-logo" src="/assets/sdn bandarharjo 02 logo.png" alt="SDN Bandarharjo 02">
+                <img class="footer-logo" src="assets/sdn bandarharjo 02 logo.png" alt="SDN Bandarharjo 02">
                 <div class="footer-text">
                     <h2>SD BANDARHARJO 02</h2>
                     <p>Jl. Lodan Raya No.1 Kel. Bandarharjo, Kec. Semarang Utara, Kota Semarang 50175</p>
@@ -16,10 +16,10 @@
             <div class="social-media">
                 <h3>Ikuti Kami : </h3>
                 <div class="social-icons">
-                    <a href="#"><img src="/assets/icon/facebook.png" alt="Facebook"></a>
-                    <a href="#"><img src="/assets/icon/instagram.png" alt="Instagram"></a>
-                    <a href="#"><img src="/assets/icon/youtube.png" alt="YouTube"></a>
-                    <a href="#"><img src="/assets/icon/twitter.png" alt="Twitter"></a>
+                    <a href="#"><img src="assets/icon/facebook.png" alt="Facebook"></a>
+                    <a href="#"><img src="assets/icon/instagram.png" alt="Instagram"></a>
+                    <a href="#"><img src="assets/icon/youtube.png" alt="YouTube"></a>
+                    <a href="#"><img src="assets/icon/twitter.png" alt="Twitter"></a>
                 </div>
             </div>
 

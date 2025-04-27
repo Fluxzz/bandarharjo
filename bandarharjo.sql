@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 25, 2025 at 04:11 PM
+-- Generation Time: Apr 25, 2025 at 10:43 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -43,6 +43,41 @@ INSERT INTO `beranda` (`id`, `isi`, `foto`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `ebook`
+--
+
+CREATE TABLE `ebook` (
+  `id` int(11) NOT NULL,
+  `judul` varchar(255) NOT NULL,
+  `deskripsi` text NOT NULL,
+  `file` varchar(500) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `ebook`
+--
+
+INSERT INTO `ebook` (`id`, `judul`, `deskripsi`, `file`) VALUES
+(1, 'Ebook 1', 'Deskripsi ebook pertama', 'ebook1.pdf'),
+(2, 'Ebook 2', 'Deskripsi ebook kedua', 'ebook2.pdf'),
+(3, 'Ebook 3', 'Deskripsi ebook ketiga', 'ebook3.pdf');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ekstrakurikuler`
+--
+
+CREATE TABLE `ekstrakurikuler` (
+  `id` int(11) NOT NULL,
+  `nama` varchar(255) NOT NULL,
+  `foto` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `galery`
 --
 
@@ -60,22 +95,29 @@ CREATE TABLE `galery` (
 --
 
 INSERT INTO `galery` (`id`, `foto`, `judul`, `isi`, `url_video`, `kategori`) VALUES
-(2, NULL, 'MPLS Hari Pertama', 'Foto kegiatan MPLS Hari Pertama T.A. 2021/2022', NULL, 'foto'),
-(3, NULL, 'Lomba Akademik', 'Foto lomba akademik di sekolah', NULL, 'foto'),
-(4, NULL, 'Kegiatan Belajar Mengajar', 'Foto kegiatan belajar mengajar di kelas', NULL, 'foto'),
-(5, NULL, 'Penerimaan Siswa Baru', 'Foto acara penerimaan siswa baru T.A. 2021/2022', NULL, 'foto'),
-(6, NULL, 'Wisuda Siswa', 'Foto acara wisuda siswa tahun ajaran 2021/2022', NULL, 'foto'),
-(7, NULL, 'MPLS Hari kedua', 'Video kegiatan MPLS Hari Pertama T.A. 2021/2022', NULL, 'video'),
-(8, NULL, 'Lomba Akademik', 'Video lomba akademik di sekolah', NULL, 'video'),
-(9, NULL, 'Kegiatan Belajar Mengajar', 'Video kegiatan belajar mengajar di kelas', NULL, 'video'),
-(10, NULL, 'Penerimaan Siswa Baru', 'Video acara penerimaan siswa baru T.A. 2021/2022', NULL, 'video'),
-(11, NULL, 'Wisuda Siswa', 'Video acara wisuda siswa tahun ajaran 2021/2022', NULL, 'video'),
-(12, NULL, 'asa', 'ada', '', 'video'),
-(13, NULL, 'asa', 'ada', '', 'video'),
-(14, NULL, 'ada', 'ada', 'https://youtu.be/R28WNhOJgnk?si=V5y-tAtoVwJfJJAC', 'video'),
-(15, NULL, 'ada', 'ada', 'https://youtu.be/R28WNhOJgnk?si=V5y-tAtoVwJfJJAC', 'video'),
-(16, NULL, 'administrasi', 'ada', 'https://youtu.be/R28WNhOJgnk?si=V5y-tAtoVwJfJJAC', 'video'),
-(17, NULL, 'Pengumuman MPLS Terbaru', 'asada', 'https://youtu.be/R28WNhOJgnk?si=V5y-tAtoVwJfJJAC', 'video');
+(18, '', 'pengumuman ppdb 2025', 'pengumuman', 'https://youtu.be/DHjqpvDnNGE?feature=shared', 'video'),
+(27, '680bee64339df.jpg', 'pengumuman ppdb 2025', 'asasas', '', 'foto'),
+(28, '680bf0988f05a.jpg', 'berita', 'asdasdasdasdas', '', 'foto');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `kaldik`
+--
+
+CREATE TABLE `kaldik` (
+  `id` int(11) NOT NULL,
+  `tahun_ajaran` varchar(255) NOT NULL,
+  `file_kaldik` varchar(255) NOT NULL,
+  `tanggal_upload` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `kaldik`
+--
+
+INSERT INTO `kaldik` (`id`, `tahun_ajaran`, `file_kaldik`, `tanggal_upload`) VALUES
+(6, '2022/2023', 'file_kaldik/KALDIK_KOTA_SEMARANG_2022-2023.pdf', '2025-04-25 17:14:30');
 
 -- --------------------------------------------------------
 
@@ -141,9 +183,32 @@ INSERT INTO `pengumuman` (`id`, `judul`, `foto`, `isi`, `kategori`, `created_at`
 (22, 'Pengumuman MPLS Terbaru', 'pengumuman_680af267273c17.36471197.png', 'ada', '', '2025-04-25 02:24:39'),
 (23, 'ppdb', 'pengumuman_680af2896d6e61.27999593.png', 'ppdb', '', '2025-04-25 02:25:13'),
 (24, 'ppdb', 'Screenshot 2025-02-19 202254.png', 'asa', 'PPDB', '2025-04-25 02:28:34'),
-(25, 'Pengumuman MPLS Terbaru', 'Cuplikan layar 2023-11-15 192135.png', 'mpls', 'MPLS', '2025-04-25 02:28:55'),
 (26, 'berita', 'Screenshot 2025-01-28 124906.png', 'cada', 'Berita', '2025-04-25 02:29:12'),
 (27, 'MPLSS', 'kemendikbud.png', 'ada', 'MPLS', '2025-04-25 02:31:55');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `prestasi`
+--
+
+CREATE TABLE `prestasi` (
+  `id` int(11) NOT NULL,
+  `nama` varchar(255) NOT NULL,
+  `foto` varchar(255) DEFAULT NULL,
+  `kategori` varchar(255) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `prestasi`
+--
+
+INSERT INTO `prestasi` (`id`, `nama`, `foto`, `kategori`, `created_at`) VALUES
+(8, '3', '/upload/680bc173c34b8-gc.gif', 'sang_juara', '2025-04-25 12:08:03'),
+(9, '1', '/upload/680bc193c0d80-gc.gif', 'prestasi', '2025-04-25 12:08:35'),
+(10, '2', '/upload/680bc1d64327c-mybernadya.jpg', 'prestasi', '2025-04-25 12:09:42'),
+(11, '4', '/upload/680bc1e77e4f8-pp.jpg', 'sang_juara', '2025-04-25 12:09:59');
 
 -- --------------------------------------------------------
 
@@ -331,7 +396,7 @@ CREATE TABLE `tautan` (
 
 INSERT INTO `tautan` (`id`, `nama`, `link`, `foto`) VALUES
 (2, 'Berita Terkini Semarang', 'https://www.suarasemarang.com/berita-terkini-semarang', ''),
-(6, 'Komidigi', 'https://www.komdigi.go.id/', '/upload/kominfo.png');
+(6, 'Kominfo', 'https://www.komdigi.go.id/', '/upload/kominfo.png');
 
 --
 -- Indexes for dumped tables
@@ -344,11 +409,29 @@ ALTER TABLE `beranda`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `ebook`
+--
+ALTER TABLE `ebook`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `ekstrakurikuler`
+--
+ALTER TABLE `ekstrakurikuler`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `galery`
 --
 ALTER TABLE `galery`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `kategori` (`id`);
+
+--
+-- Indexes for table `kaldik`
+--
+ALTER TABLE `kaldik`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `lomba`
@@ -366,6 +449,12 @@ ALTER TABLE `pendidik`
 -- Indexes for table `pengumuman`
 --
 ALTER TABLE `pengumuman`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `prestasi`
+--
+ALTER TABLE `prestasi`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -421,10 +510,28 @@ ALTER TABLE `beranda`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `ebook`
+--
+ALTER TABLE `ebook`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `ekstrakurikuler`
+--
+ALTER TABLE `ekstrakurikuler`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `galery`
 --
 ALTER TABLE `galery`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+
+--
+-- AUTO_INCREMENT for table `kaldik`
+--
+ALTER TABLE `kaldik`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `lomba`
@@ -443,6 +550,12 @@ ALTER TABLE `pendidik`
 --
 ALTER TABLE `pengumuman`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+
+--
+-- AUTO_INCREMENT for table `prestasi`
+--
+ALTER TABLE `prestasi`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `siswa1`
