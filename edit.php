@@ -1,5 +1,5 @@
 <?php
-include('/bandarharjo/koneksi.php');
+include('koneksi.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $isi = $_POST['description'];
@@ -7,20 +7,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Jika upload file dilakukan
     if (isset($_FILES['photo']) && $_FILES['photo']['error'] == 0) {
-        $namaFile = $_FILES['photo']['name'];
+        $namaFile = $_FILES['photo']['name'];  // Nama file asli
         $tmpFile = $_FILES['photo']['tmp_name'];
-        $tujuan = "/bandarharjo/upload/" . $namaFile;
-
+        $folderTujuan = "bandarharjo/upload/";  // Folder tujuan untuk menyimpan gambar
+        $tujuan = $folderTujuan . $namaFile;
 
         // Simpan file ke folder upload
-        move_uploaded_file($tmpFile, $_SERVER['DOCUMENT_ROOT'] . $tujuan);
+        move_uploaded_file($tmpFile, $_SERVER['DOCUMENT_ROOT'] . '/' . $tujuan);
 
-        // Update isi dan foto
+        // Update isi dan foto (hanya simpan nama file di database)
         $query = "UPDATE beranda SET isi = ?, foto = ? WHERE id = ?";
         $stmt = $conn->prepare($query);
-        $stmt->bind_param("ssi", $isi, $tujuan, $id);
+        $stmt->bind_param("ssi", $isi, $namaFile, $id);  // Menggunakan nama file saja
     } else {
-        // Update hanya isi
+        // Update hanya isi jika tidak ada file yang di-upload
         $query = "UPDATE beranda SET isi = ? WHERE id = ?";
         $stmt = $conn->prepare($query);
         $stmt->bind_param("si", $isi, $id);

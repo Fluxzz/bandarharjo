@@ -1,9 +1,11 @@
 <?php
 // koneksi ke database
-include '/bandarharjo/koneksi.php';
+include '../../../koneksi.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Mengambil data dari form
     $tahun_ajaran = $_POST['tahun_ajaran'];
+    $kategori = $_POST['kategori'];  // Pastikan kategori diterima dengan benar
 
     // Lokasi penyimpanan file relatif terhadap folder proyek
     $target_dir = "file_kaldik/";
@@ -22,8 +24,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $uploadOk = 0;
     }
 
-    // Batasi ukuran file maksimal 5MB
-    if ($_FILES["file_kaldik"]["size"] > 500000000) {
+    // Batasi ukuran file maksimal 50MB
+    if ($_FILES["file_kaldik"]["size"] > 50000000) {  // Sesuaikan ukuran file maksimal sesuai kebutuhan
         echo "Maaf, ukuran file terlalu besar.<br>";
         $uploadOk = 0;
     }
@@ -37,10 +39,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Upload file jika lolos pengecekan
     if ($uploadOk == 1) {
         if (move_uploaded_file($_FILES["file_kaldik"]["tmp_name"], $target_file)) {
-            // Simpan ke database
-            $sql = "INSERT INTO kaldik (tahun_ajaran, file_kaldik) VALUES ('$tahun_ajaran', '$target_file')";
+            // Simpan hanya nama file di database, tanpa path
+            $nama_file = mysqli_real_escape_string($conn, $nama_file);  // Menghindari SQL Injection
+            $kategori = mysqli_real_escape_string($conn, $kategori);  // Menghindari SQL Injection
+
+            // Simpan data ke database
+            $sql = "INSERT INTO kaldik (tahun_ajaran, file_kaldik, kategori) VALUES ('$tahun_ajaran', '$nama_file', '$kategori')";
             if (mysqli_query($conn, $sql)) {
-                echo "Data berhasil ditambahkan. <a href='$target_file' target='_blank'>Lihat File</a>";
+                echo "Data berhasil ditambahkan. <a href='$target_dir$nama_file' target='_blank'>Lihat File</a>";
             } else {
                 echo "Gagal menyimpan ke database: " . mysqli_error($conn);
             }

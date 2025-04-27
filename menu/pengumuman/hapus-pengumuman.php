@@ -1,5 +1,5 @@
 <?php
-include '/bandarharjo/koneksi.php';
+include('../../koneksi.php');
 
 if (isset($_GET['id'])) {
     $id = intval($_GET['id']);

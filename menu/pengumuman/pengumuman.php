@@ -1,7 +1,7 @@
 <?php
 // Menghubungkan ke database
-include '/bandarharjo/partials/header.php';
-include '/bandarharjo/koneksi.php';
+include('../../partials/header.php');
+include('../../koneksi.php');
 
 // Ambil kategori dari URL atau set default
 $kategori = isset($_GET['kategori']) ? $_GET['kategori'] : 'MPLS';
@@ -39,7 +39,7 @@ $beritaResult = $stmtBerita->get_result();
 
 ?>
 
-<link rel="stylesheet" href="/css/pengumuman.css">
+<link rel="stylesheet" href="../../css/pengumuman.css">
 
 <body>
   <div class="container">
@@ -71,7 +71,7 @@ $beritaResult = $stmtBerita->get_result();
       <div class="mpls-container" id="mpls-container">
         <?php while ($pengumuman = $result->fetch_assoc()) { ?>
           <div class="mpls-card">
-            <img src="/bandarharjo/upload/<?php echo $pengumuman['foto']; ?>" alt="Pengumuman Image">
+            <img src="../../upload/<?php echo $pengumuman['foto']; ?>" alt="Pengumuman Image">
             <div class="mpls-card-content">
               <h3><?php echo $pengumuman['judul']; ?></h3>
               <div class="underline"></div>
@@ -89,7 +89,7 @@ $beritaResult = $stmtBerita->get_result();
       <div class="ppdb-container" id="ppdb-container" style="display: none;">
         <?php while ($pengumuman = $ppdbResult->fetch_assoc()) { ?>
           <div class="card">
-            <img src="/bandarharjo/upload/<?php echo $pengumuman['foto']; ?>" alt="PPDB Image">
+            <img src="../../upload/<?php echo $pengumuman['foto']; ?>" alt="PPDB Image">
             <div class="card-text">
               <h3><?php echo $pengumuman['judul']; ?></h3>
               <div class="underline"></div>
@@ -108,7 +108,7 @@ $beritaResult = $stmtBerita->get_result();
         <?php if ($beritaResult->num_rows > 0): ?>
           <?php while ($pengumuman = $beritaResult->fetch_assoc()): ?>
             <div class="berita-card">
-              <img src="/bandarharjo/upload/<?php echo $pengumuman['foto']; ?>" alt="Berita Image">
+              <img src="../../upload/<?php echo $pengumuman['foto']; ?>" alt="Berita Image">
               <div class="berita-content">
                 <h3><?php echo $pengumuman['judul']; ?></h3>
                 <div class="underline"></div>
@@ -137,8 +137,8 @@ $beritaResult = $stmtBerita->get_result();
   </div>
 </body>
 
-<script src="/js/pengumuman.js"></script>
+<script src="../../js/pengumuman.js"></script>
 
 <?php
-include('/bandarharjo/partials/footer.php');
+include('../../partials/footer.php');
 ?>
