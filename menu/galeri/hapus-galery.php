@@ -1,5 +1,5 @@
 <?php
-include '/bandarharjo/koneksi.php'; // koneksi database
+include '../../koneksi.php'; // koneksi database
 
 $id = $_GET['id'];
 
