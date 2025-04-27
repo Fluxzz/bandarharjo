@@ -1,11 +1,17 @@
 <?php
+session_start();
 include('/bandarharjo/partials/header.php');
 include('/bandarharjo/koneksi.php');
+
+// Cek apakah user sudah login dan periksa role admin
+$show_edit_button = false;
+if (isset($_SESSION['username']) && $_SESSION['role'] == 'admin') {
+    $show_edit_button = true;
+}
 
 // Ambil data sarana dari database
 $sql = "SELECT keterangan, jumlah FROM sarana";
 $result = $conn->query($sql);
-
 ?>
 
 <link rel="stylesheet" href="/css/siswa.css">
@@ -97,9 +103,13 @@ $result = $conn->query($sql);
         <div class="title">SARANA PRASARANA</div>
 
         <div class="table-container">
-            <div class="tambah-btn">
-                <a href="tambah-sarana.php"><button class="btn-tambah">Tambah Data Sarana</button></a>
-            </div>
+            <!-- Tombol "Tambah Data Sarana" hanya muncul jika role adalah admin -->
+            <?php if ($show_edit_button): ?>
+                <div class="tambah-btn">
+                    <a href="tambah-sarana.php"><button class="btn-tambah">Tambah Data Sarana</button></a>
+                </div>
+            <?php endif; ?>
+
             <table>
                 <thead>
                     <tr>
@@ -117,8 +127,11 @@ $result = $conn->query($sql);
                             echo "<td>" . htmlspecialchars($row["keterangan"]) . "</td>";
                             echo "<td>" . htmlspecialchars($row["jumlah"]) . "</td>";
                             echo "<td>";
-                            echo "<a href='edit-sarana.php?keterangan=$keterangan'><button class='btn-edit'>Edit</button></a> ";
-                            echo "<a href='hapus-sarana.php?keterangan=$keterangan' onclick=\"return confirm('Yakin ingin menghapus data ini?');\"><button class='btn-hapus'>Hapus</button></a>";
+                            // Tombol Edit dan Hapus hanya muncul jika role adalah admin
+                            if ($show_edit_button) {
+                                echo "<a href='edit-sarana.php?keterangan=$keterangan'><button class='btn-edit'>Edit</button></a> ";
+                                echo "<a href='hapus-sarana.php?keterangan=$keterangan' onclick=\"return confirm('Yakin ingin menghapus data ini?');\"><button class='btn-hapus'>Hapus</button></a>";
+                            }
                             echo "</td>";
                             echo "</tr>";
                         }

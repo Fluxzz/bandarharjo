@@ -1,4 +1,5 @@
 <?php
+session_start();
 include('/bandarharjo/partials/header.php');
 ?>
 
@@ -53,7 +54,9 @@ include('/bandarharjo/partials/header.php');
 
           <div class="submit-btn">
             <button type="submit">Kirim</button>
-            <a href="daftar-pengaduan.php" class="btn-daftar">Daftar Pengaduan</a>
+            <?php if (isset($_SESSION['username']) && $_SESSION['role'] == 'admin'): ?>
+              <a href="daftar-pengaduan.php" class="btn-daftar">Daftar Pengaduan</a>
+            <?php endif; ?>
           </div>
 
         </form>

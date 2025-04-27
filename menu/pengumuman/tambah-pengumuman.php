@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $kategori = htmlspecialchars(trim($_POST['kategori']));
 
     // Proses upload foto
-    $targetDir = $_SERVER['DOCUMENT_ROOT'] . "../bandarharjo/upload/"; // Pastikan folder upload ada di sini
+    $targetDir = $_SERVER['DOCUMENT_ROOT'] . "/upload/"; // Pastikan folder upload ada di sini
     $fileName = basename($_FILES["foto"]["name"]);
     $targetFile = $targetDir . $fileName;
     $uploadOk = 1;
@@ -68,27 +68,36 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class="add-form">
         <h1>Tambah Pengumuman</h1>
         <form action="tambah-pengumuman.php" method="post" enctype="multipart/form-data">
-            <label>Judul:</label><br>
-            <input type="text" name="judul" required><br><br>
+            <div class="form-group">
+                <label>Judul:</label>
+                <input type="text" name="judul" required>
+            </div>
 
-            <label>Isi:</label><br>
-            <textarea name="isi" required></textarea><br><br>
+            <div class="form-group">
+                <label>Isi:</label>
+                <textarea name="isi" required></textarea>
+            </div>
 
-            <label>Kategori:</label><br>
-            <select name="kategori" required>
-                <option value="">-- Pilih Kategori --</option>
-                <option value="PPDB">PPDB</option>
-                <option value="MPLS">MPLS</option>
-                <option value="Berita">Berita</option>
-            </select><br><br>
+            <div class="form-group">
+                <label>Kategori:</label>
+                <select name="kategori" required>
+                    <option value="">-- Pilih Kategori --</option>
+                    <option value="PPDB">PPDB</option>
+                    <option value="MPLS">MPLS</option>
+                    <option value="Berita">Berita</option>
+                </select>
+            </div>
 
-            <label>Upload Foto:</label><br>
-            <input type="file" name="foto" required><br><br>
+            <div class="form-group">
+                <label>Upload Foto:</label>
+                <input type="file" name="foto" required>
+            </div>
 
-            <button type="submit" name="submit">Kirim</button>
+            <button type="submit" name="submit" class="btn-submit">Kirim</button>
         </form>
     </div>
 </body>
+
 <?php
-include('../../partials/footer.php');
+include('/bandarharjo/partials/footer.php');
 ?>

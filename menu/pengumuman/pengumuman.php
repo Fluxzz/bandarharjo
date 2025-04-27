@@ -1,7 +1,10 @@
 <?php
-// Menghubungkan ke database
+session_start();  // Memulai sesi pengguna
 include('../../partials/header.php');
 include('../../koneksi.php');
+
+// Cek apakah user memiliki peran admin
+$isAdmin = isset($_SESSION['role']) && $_SESSION['role'] == 'admin'; // Menyaring admin
 
 // Ambil kategori dari URL atau set default
 $kategori = isset($_GET['kategori']) ? $_GET['kategori'] : 'MPLS';
@@ -39,7 +42,7 @@ $beritaResult = $stmtBerita->get_result();
 
 ?>
 
-<link rel="stylesheet" href="../../css/pengumuman.css">
+<link rel="stylesheet" href="/css/pengumuman.css">
 
 <body>
   <div class="container">
@@ -64,58 +67,68 @@ $beritaResult = $stmtBerita->get_result();
         </div>
       </div>
 
-      <div class="add-announcement">
-        <button class="btn" onclick="window.location.href='tambah-pengumuman.php'">Tambah Pengumuman</button>
-      </div>
+      <!-- Tombol untuk admin menambah pengumuman -->
+      <?php if ($isAdmin): ?>
+        <div class="add-announcement">
+          <button class="btn" onclick="window.location.href='tambah-pengumuman.php'">Tambah Pengumuman</button>
+        </div>
+      <?php endif; ?>
 
+      <!-- Pengumuman MPLS -->
       <div class="mpls-container" id="mpls-container">
         <?php while ($pengumuman = $result->fetch_assoc()) { ?>
           <div class="mpls-card">
-            <img src="../../upload/<?php echo $pengumuman['foto']; ?>" alt="Pengumuman Image">
+            <img src="/upload/<?php echo $pengumuman['foto']; ?>" alt="Pengumuman Image">
             <div class="mpls-card-content">
               <h3><?php echo $pengumuman['judul']; ?></h3>
               <div class="underline"></div>
               <a href="detail-pengumuman.php?id=<?php echo $pengumuman['id']; ?>">
                 <button class="btn">Baca Selengkapnya >></button>
               </a>
-              <button class='delete-btn' onclick="showDeletePopup('<?php echo $pengumuman['id']; ?>')">Hapus</button>
-
+              <?php if ($isAdmin): ?>
+                <!-- Admin dapat menghapus atau mengedit pengumuman -->
+                <button class='delete-btn' onclick="showDeletePopup('<?php echo $pengumuman['id']; ?>')">Hapus</button>
+                <a href="edit-pengumuman.php?id=<?php echo $pengumuman['id']; ?>" class="btn">Edit</a>
+              <?php endif; ?>
             </div>
           </div>
-
         <?php } ?>
       </div>
 
+      <!-- Pengumuman PPDB -->
       <div class="ppdb-container" id="ppdb-container" style="display: none;">
         <?php while ($pengumuman = $ppdbResult->fetch_assoc()) { ?>
           <div class="card">
-            <img src="../../upload/<?php echo $pengumuman['foto']; ?>" alt="PPDB Image">
+            <img src="/upload/<?php echo $pengumuman['foto']; ?>" alt="PPDB Image">
             <div class="card-text">
               <h3><?php echo $pengumuman['judul']; ?></h3>
               <div class="underline"></div>
               <a href="detail-pengumuman.php?id=<?php echo $pengumuman['id']; ?>">
                 <button class="btn">Baca Selengkapnya >></button>
               </a>
-              <button class='delete-btn' onclick="showDeletePopup('<?php echo $pengumuman['id']; ?>')">Hapus</button>
-
+              <?php if ($isAdmin): ?>
+                <button class='delete-btn' onclick="showDeletePopup('<?php echo $pengumuman['id']; ?>')">Hapus</button>
+                <a href="edit-pengumuman.php?id=<?php echo $pengumuman['id']; ?>" class="btn">Edit</a>
+              <?php endif; ?>
             </div>
           </div>
         <?php } ?>
       </div>
 
-
+      <!-- Pengumuman Berita -->
       <div class="berita-container" id="berita-container" style="display: none;">
         <?php if ($beritaResult->num_rows > 0): ?>
           <?php while ($pengumuman = $beritaResult->fetch_assoc()): ?>
             <div class="berita-card">
-              <img src="../../upload/<?php echo $pengumuman['foto']; ?>" alt="Berita Image">
+              <img src="/upload/<?php echo $pengumuman['foto']; ?>" alt="Berita Image">
               <div class="berita-content">
                 <h3><?php echo $pengumuman['judul']; ?></h3>
                 <div class="underline"></div>
                 <a href="detail-pengumuman.php?id=<?php echo $pengumuman['id']; ?>" class="btn">Baca Selengkapnya >></a>
-                <button class='delete-btn' onclick="showDeletePopup('<?php echo $pengumuman['id']; ?>')">Hapus</button>
-
-
+                <?php if ($isAdmin): ?>
+                  <button class='delete-btn' onclick="showDeletePopup('<?php echo $pengumuman['id']; ?>')">Hapus</button>
+                  <a href="edit-pengumuman.php?id=<?php echo $pengumuman['id']; ?>" class="btn">Edit</a>
+                <?php endif; ?>
               </div>
             </div>
           <?php endwhile; ?>
@@ -125,7 +138,7 @@ $beritaResult = $stmtBerita->get_result();
       </div>
 
       <div class="delete-user" id="delete-user">
-        <!-- Popup -->
+        <!-- Popup konfirmasi -->
         <div class="delete-popup">
           <p>Yakin Untuk Menghapus Data Ini?</p>
           <button class="cancel" onclick="closePopup()">TIDAK</button>
@@ -137,7 +150,7 @@ $beritaResult = $stmtBerita->get_result();
   </div>
 </body>
 
-<script src="../../js/pengumuman.js"></script>
+<script src="/js/pengumuman.js"></script>
 
 <?php
 include('../../partials/footer.php');

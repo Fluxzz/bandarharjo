@@ -38,7 +38,7 @@ body {
 }
 
 .right .search-btn,
-.right .login-btn {
+.right .login-btn, .logout-btn{
   border: none;
   font-weight: bold;
   font-size: 15px;
@@ -291,4 +291,25 @@ footer {
   .left img{
     width: 80px;
     margin: 15px;
+}
+
+
+.notification {
+  background-color: #4CAF50; /* Warna hijau */
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  position: fixed;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  width: auto;
+  max-width: 300px;
+}
+
+
+span{
+  margin-right: 10px;
 }

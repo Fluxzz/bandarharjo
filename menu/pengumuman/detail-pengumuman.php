@@ -24,7 +24,7 @@ if (isset($_GET['id'])) {
 <link rel="stylesheet" href="../../css/detail-pengumuman.css">
 <body>
     <div class="detail-container">
-    <img src="../../bandarharjo/upload/<?php echo $data['foto']; ?>" alt="Pengumuman Image">
+    <img src="/upload/<?php echo $data['foto']; ?>" alt="Pengumuman Image">
         <h1><?php echo htmlspecialchars($data['judul']); ?></h1>
         <div class="isi">
             <?php echo $data['isi']; ?>

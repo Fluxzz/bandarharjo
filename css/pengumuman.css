@@ -365,8 +365,6 @@
 
 
 
-
-
 .add-form {
   width: 50%;
   margin: 50px auto;
@@ -377,7 +375,7 @@
   background-color: #f9f9f9;
 }
 
-h1 {
+.add-form h1 {
   text-align: center;
   margin-bottom: 20px;
 }
@@ -389,15 +387,18 @@ h1 {
 .form-group label {
   display: block;
   font-weight: bold;
+  margin-bottom: 5px;
 }
 
 .form-group input,
+.form-group select,
 .form-group textarea {
   width: 100%;
   padding: 10px;
   margin-top: 5px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  box-sizing: border-box;
 }
 
 .form-group textarea {
@@ -407,11 +408,12 @@ h1 {
 .btn-submit {
   background-color: #4CAF50;
   color: white;
-  padding: 10px 20px;
+  padding: 12px 20px;
   border: none;
   cursor: pointer;
   border-radius: 5px;
   width: 100%;
+  font-size: 16px;
 }
 
 .btn-submit:hover {

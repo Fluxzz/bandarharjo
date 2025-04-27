@@ -1,12 +1,12 @@
 <?php
-// Menyertakan koneksi database
-include('/bandarharjo/partials/header.php');
-include('/bandarharjo/koneksi.php');
+session_start();
+include '/bandarharjo/partials/header.php';
+include '/bandarharjo/koneksi.php';
 
-// Tentukan kelas yang dipilih, default ke '2A'
-$kelas = isset($_GET['kelas']) ? $_GET['kelas'] : '3A'; 
+// Default kelas
+$kelas = isset($_GET['kelas']) ? $_GET['kelas'] : '3A';
 
-// Menentukan kategori berdasarkan kelas yang dipilih
+// Menentukan kategori
 $kategori = '';
 if ($kelas == '3A') {
     $kategori = 'A';
@@ -16,168 +16,146 @@ if ($kelas == '3A') {
     $kategori = 'C';
 }
 
-// Proses menambah data siswa
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['nisn']) && isset($_POST['nama'])) {
-    if (isset($_POST['nisnLama'])) {
-        // Edit data siswa
-        $nisnLama = $_POST['nisnLama'];
+// Tambah/Edit
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (isset($_POST['nisn']) && isset($_POST['nama'])) {
         $nama = $_POST['nama'];
         $nisn = $_POST['nisn'];
+        $kategori = $_POST['kategori'] ?? $kategori;
 
-        $updateQuery = "UPDATE siswa3 SET nama = ?, nisn = ?, kategori = ? WHERE nisn = ?";
-        if ($stmt = $conn->prepare($updateQuery)) {
-            $stmt->bind_param("sssi", $nama, $nisn, $kategori, $nisnLama);
-            if ($stmt->execute()) {
-                header("Location: kelas3.php?kelas=3" . $kategori);
+        if (isset($_POST['nisnLama'])) {
+            // Proses Edit
+            $nisnLama = $_POST['nisnLama'];
+            $updateQuery = "UPDATE siswa3 SET nama = ?, nisn = ?, kategori = ? WHERE nisn = ?";
+            if ($stmt = $conn->prepare($updateQuery)) {
+                $stmt->bind_param("ssss", $nama, $nisn, $kategori, $nisnLama);
+                $stmt->execute();
+                header("Location: kelas3.php?kelas=3$kategori");
                 exit();
-            } else {
-                echo "Error: " . $stmt->error;
             }
         } else {
-            echo "Error: " . $conn->error;
-        }
-    } else {
-        // Tambah data siswa baru
-        $nama = $_POST['nama'];
-        $nisn = $_POST['nisn'];
-
-        $insertQuery = "INSERT INTO siswa3 (nama, nisn, kategori) VALUES (?, ?, ?)";
-        if ($stmt = $conn->prepare($insertQuery)) {
-            $stmt->bind_param("sss", $nama, $nisn, $kategori);
-            if ($stmt->execute()) {
-                header("Location: kelas3.php?kelas=" . $kategori);
+            // Proses Tambah
+            $insertQuery = "INSERT INTO siswa3 (nama, nisn, kategori) VALUES (?, ?, ?)";
+            if ($stmt = $conn->prepare($insertQuery)) {
+                $stmt->bind_param("sss", $nama, $nisn, $kategori);
+                $stmt->execute();
+                header("Location: kelas3.php?kelas=3$kategori");
                 exit();
-            } else {
-                echo "Error: " . $stmt->error;
             }
-        } else {
-            echo "Error: " . $conn->error;
         }
     }
 }
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['hapus_nisn'])) {
+
+// Hapus
+if (isset($_POST['hapus_nisn'])) {
     $nisnHapus = $_POST['hapus_nisn'];
 
     $deleteQuery = "DELETE FROM siswa3 WHERE nisn = ?";
     if ($stmt = $conn->prepare($deleteQuery)) {
-        $stmt->bind_param("i", $nisnHapus);
-        if ($stmt->execute()) {
-            // Menggunakan JavaScript untuk me-refresh halaman dan kemudian kembali ke halaman sebelumnya
-            echo "<script>
-                    window.location.reload();  // Refresh the page after deletion
-                    window.location.href = window.history.back(); 
-                </script>";
-            exit();
-        } else {
-            echo "Error: " . $stmt->error;
-        }
-    } else {
-        echo "Error: " . $conn->error;
+        $stmt->bind_param("s", $nisnHapus);
+        $stmt->execute();
+        echo "<script>window.location.href = 'kelas3.php?kelas=3$kategori';</script>";
+        exit();
     }
 }
 
-
-// Query untuk mengambil data siswa berdasarkan kategori kelas yang dipilih
-$querySiswa = "SELECT * FROM siswa3 WHERE kategori='$kategori'";
-$resultSiswa = $conn->query($querySiswa);
+// Ambil data siswa
+$query = "SELECT * FROM siswa3 WHERE kategori='$kategori'";
+$result = $conn->query($query);
 ?>
 
 <link rel="stylesheet" href="/css/kelas.css">
+
 <body>
+<div class="container">
 
-
-    <div class="container">
-        <div class="navbar-item">
-            <div class="navigation">
-                <div class="title">
-                    <h1>KELAS</h1>
-                </div>
-                <div class="nav-underline"></div>
-                <div class="selection">
-                    <div class="option" onclick="window.location.href='?kelas=3A'"><p>Kelas 3A</p></div>
-                    <div class="option" onclick="window.location.href='?kelas=3B'"><p>Kelas 3B</p></div>
-                    <div class="option" onclick="window.location.href='?kelas=3C'"><p>Kelas 3C</p></div>
-                </div>
+    <div class="navbar-item">
+        <div class="navigation">
+            <div class="title">
+                <h1>KELAS 3</h1>
+            </div>
+            <div class="nav-underline"></div>
+            <div class="selection">
+                <div class="option" onclick="window.location.href='?kelas=3A'"><p>Kelas 3A</p></div>
+                <div class="option" onclick="window.location.href='?kelas=3B'"><p>Kelas 3B</p></div>
+                <div class="option" onclick="window.location.href='?kelas=3C'"><p>Kelas 3C</p></div>
             </div>
         </div>
-
-        <div class="table-container">
-                <div class="tambah-btn">
-                <button type="button" onclick="showAddForm()" class="btn-submit">Tambah Data Siswa</button>
-                </div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Nama</th>
-                        <th>NISN</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php 
-                        if ($resultSiswa->num_rows > 0) {
-                            while ($siswa = $resultSiswa->fetch_assoc()) {
-                                echo "<tr>
-                                        <td>" . htmlspecialchars($siswa['nama']) . "</td>
-                                        <td>" . htmlspecialchars($siswa['nisn']) . "</td>
-                                        <td>
-                                            <div class='aksi-buttons'>
-                                                <!-- Tombol Edit sebagai trigger untuk membuka modal -->
-                                                <button type='button' onclick=\"showEditForm('" . addslashes($siswa['nama']) . "', '" . $siswa['nisn'] . "')\" class='btn-edit'>Edit</button>
-                            
-                                                <!-- Tombol Hapus -->
-                                                <form action='kelas1.php?kelas=<?php echo htmlspecialchars($kelas); ?>' method='POST' onsubmit='return confirm(\"Yakin ingin menghapus data ini?\");'>
-                                                    <input type='hidden' name='hapus_nisn' value='" . htmlspecialchars($siswa['nisn']) . "'>
-                                                    <button type='submit' class='btn-hapus'>Hapus</button>
-                                                </form>
-                                            </div>
-                                        </td>
-                                      </tr>";
-                            }
-                        } else {
-                            echo "<tr><td colspan='3'>Data tidak ditemukan</td></tr>";
-                        }
-                        ?>
-                </tbody>
-            </table>
-        </div>
     </div>
 
-    <?php include('/bandarharjo/partials/footer.php');?>
-
-<!-- Form Edit Modal (Popup) -->
-    <div id="editModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="hideEditForm()">&times;</span>
-            <h3>Edit Data Siswa</h3>
-            <form id="editForm" action="kelas1.php?kelas=<?php echo $kelas; ?>" method="POST">
-                <input type="hidden" name="nisnLama" id="nisnLama">
-                <label for="nama">Nama:</label><br>
-                <input type="text" name="nama" id="editNama" required><br><br>
-                <label for="nisn">NISN:</label><br>
-                <input type="text" name="nisn" id="editNISN" required><br><br>
-                <button type="submit">Simpan Perubahan</button>
-            </form>
+    <div class="table-container">
+        <div class="tambah-btn">
+            <button type="button" onclick="showAddForm()" class="btn-tambah">Tambah Data Siswa</button>
         </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nama</th>
+                    <th>NISN</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php 
+                if ($result->num_rows > 0) {
+                    while ($siswa = $result->fetch_assoc()) {
+                        echo "<tr>
+                            <td>" . htmlspecialchars($siswa['nama']) . "</td>
+                            <td>" . htmlspecialchars($siswa['nisn']) . "</td>
+                            <td>
+                                <div class='aksi-buttons'>
+                                    <button type='button' class='btn-edit' onclick=\"showEditForm('" . addslashes($siswa['nama']) . "', '" . $siswa['nisn'] . "')\">Edit</button>
+                                    <form method='POST' style='display:inline;'>
+                                        <input type='hidden' name='hapus_nisn' value='" . htmlspecialchars($siswa['nisn']) . "'>
+                                        <button type='submit' class='btn-hapus'>Hapus</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>";
+                    }
+                } else {
+                    echo "<tr><td colspan='3'>Tidak ada data</td></tr>";
+                }
+                ?>
+            </tbody>
+        </table>
     </div>
 
-     <!-- Form Tambah Data Siswa -->
-     <div id="addFormContainer" style="display: none;">
-         <h3>Tambah Data Siswa</h3>
-         <form id="addForm" method="POST">
-        <label for="nama">Nama:</label><br>
-        <input type="text" name="nama" id="addNama" required><br><br>
+</div>
 
-        <label for="nisn">NISN:</label><br>
-        <input type="text" name="nisn" id="addNISN" required><br><br>
+<?php include '/bandarharjo/partials/footer.php'; ?>
 
-        <button type="submit" class="btn-submit">Tambah Data</button>
+<!-- Modal Tambah -->
+<div id="addFormContainer" style="display:none;">
+    <form method="POST">
+        <h3>Tambah Data Siswa</h3>
+        <label>Nama:</label>
+        <input type="text" name="nama" required>
+        <label>NISN:</label>
+        <input type="text" name="nisn" required>
+        <input type="hidden" name="kategori" value="<?php echo $kategori; ?>">
+        <button type="submit" class="btn-submit">Tambah</button>
         <button type="button" onclick="hideAddForm()" class="btn-hapus">Batal</button>
     </form>
+</div>
 
+<!-- Modal Edit -->
+<div id="editModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="hideEditForm()">&times;</span>
+        <h3>Edit Data Siswa</h3>
+        <form method="POST" id="editForm">
+            <input type="hidden" name="nisnLama" id="nisnLama">
+            <label>Nama:</label>
+            <input type="text" name="nama" id="editNama" required>
+            <label>NISN:</label>
+            <input type="text" name="nisn" id="editNISN" required>
+            <input type="hidden" name="kategori" value="<?php echo $kategori; ?>">
+            <button type="submit" class="btn-submit">Simpan Perubahan</button>
+        </form>
+    </div>
+</div>
+
+<script src="/js/siswa.js"></script>
 
 </body>
-<script src="/js/siswa.js"></script>
-<script src="/js/edit.js"></script>
-<script src="/js/tambah.js"></script>
-

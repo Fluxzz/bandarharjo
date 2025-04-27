@@ -1,6 +1,10 @@
 <?php
+session_start(); // Memulai session
 include('/bandarharjo/partials/header.php');
 include('/bandarharjo/koneksi.php');
+
+// Cek jika user adalah admin
+$isAdmin = isset($_SESSION['role']) && $_SESSION['role'] == 'admin'; // Assuming 'admin' is the role
 ?>
 
 <link rel="stylesheet" href="/css/prestasi.css">
@@ -24,12 +28,14 @@ include('/bandarharjo/koneksi.php');
             </div>
         </div>
 
-        <!-- Tombol Tambah -->
+        <!-- Tombol Tambah (Hanya untuk Admin) -->
+        <?php if ($isAdmin): ?>
         <div class="tambah-button-container">
             <a href="/menu/akademik/prestasi/tambah-prestasi.php">
                 <button class="btn-tambah">Tambah Prestasi</button>
             </a>
         </div>
+        <?php endif; ?>
 
         <!-- PRESTASI SISWA -->
         <div class="prestasi-siswa" id="prestasi-siswa">
@@ -46,11 +52,15 @@ include('/bandarharjo/koneksi.php');
                     echo "</div>";
 
                     echo "<div class='card-meta'>";
+                    // Menampilkan detail atau informasi tambahan (bisa ditambahkan sesuai kebutuhan)
+                    echo "</div>";
 
-                    echo "</div>";
-                    echo "<div class='card-actions' style='margin-top: 10px; display: flex; justify-content: center; gap: 10px;'>";
-                    echo "<a href='hapus-prestasi.php?id=" . $data['id'] . "' class='btn-hapus' onclick='return confirm(\"Yakin ingin menghapus data ini?\")'>Hapus</a>";
-                    echo "</div>";
+                    // Tombol Hapus (Hanya untuk Admin)
+                    if ($isAdmin) {
+                        echo "<div class='card-actions' style='margin-top: 10px; display: flex; justify-content: center; gap: 10px;'>";
+                        echo "<a href='hapus-prestasi.php?id=" . $data['id'] . "' class='btn-hapus' onclick='return confirm(\"Yakin ingin menghapus data ini?\")'>Hapus</a>";
+                        echo "</div>";
+                    }
 
                     echo "</div>";
                 }
@@ -75,7 +85,10 @@ include('/bandarharjo/koneksi.php');
                     echo "</div>";
 
                     echo "<div class='card-actions' style='margin-top: 10px; display: flex; justify-content: center; gap: 10px;'>";
-                    echo "<a href='hapus-prestasi.php?id=" . $data['id'] . "' class='btn-hapus' onclick='return confirm(\"Yakin ingin menghapus data ini?\")'>Hapus</a>";
+                    // Tombol Hapus (Hanya untuk Admin)
+                    if ($isAdmin) {
+                        echo "<a href='hapus-prestasi.php?id=" . $data['id'] . "' class='btn-hapus' onclick='return confirm(\"Yakin ingin menghapus data ini?\")'>Hapus</a>";
+                    }
                     echo "</div>";
 
                     echo "</div>";

@@ -1,6 +1,15 @@
 <?php
+session_start(); // Memulai session untuk pengecekan status login
+
 include('/bandarharjo/partials/header.php');
 include('/bandarharjo/koneksi.php');
+
+// Cek apakah user sudah login dan apakah mereka adalah admin
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
+    $isAdmin = false;
+} else {
+    $isAdmin = true;
+}
 
 // Ambil data pendidik
 $query = "SELECT * FROM pendidik";
@@ -39,7 +48,9 @@ if ($resultSekolah && $resultSekolah->num_rows > 0) {
 
     <div class="container">
         <div class="title">INFORMASI SEKOLAH</div>
-        <button id="edit-btn" onclick="openEditForm()">Edit Informasi Sekolah</button>
+        <?php if ($isAdmin): ?>
+            <button id="edit-btn" onclick="openEditForm()">Edit Informasi Sekolah</button>
+        <?php endif; ?>
 
         <div class="container-1">
             <div class="container-left">
@@ -89,46 +100,15 @@ if ($resultSekolah && $resultSekolah->num_rows > 0) {
                     </div>
                 </div>
             </div>
-
-            <!-- Edit Form -->
-            <div id="edit-form" class="edit-form">
-                <form action="/menu/profile/edit-sekolah.php" method="POST">
-                    <h2>Edit Informasi Sekolah</h2>
-                    <label for="sejarah">Sejarah</label>
-                    <textarea id="sejarah" name="sejarah"><?= htmlspecialchars($sejarah) ?></textarea>
-
-                    <label for="alamat">Alamat</label>
-                    <input type="text" id="alamat" name="alamat" value="<?= htmlspecialchars($alamat) ?>">
-
-                    <label for="telepon">Telepon</label>
-                    <input type="text" id="telepon" name="telepon" value="<?= htmlspecialchars($telepon) ?>">
-
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" value="<?= htmlspecialchars($email) ?>">
-
-                    <label for="letak_geografis">Letak Geografis</label>
-                    <textarea id="letak_geografis" name="letak_geografis"><?= htmlspecialchars($letak_geografis) ?></textarea>
-
-                    <label for="visi">Visi</label>
-                    <textarea id="visi" name="visi"><?= htmlspecialchars($visi) ?></textarea>
-
-                    <label for="misi">Misi</label>
-                    <textarea id="misi" name="misi"><?= htmlspecialchars($misi) ?></textarea>
-
-                    <button type="submit" name="update">Update</button>
-                    <button type="button" onclick="closeEditForm()">Cancel</button>
-                </form>
-            </div>
-
         </div>
-
-
 
         <div class="container-2">
             <div class="title">PENDIDIK DAN TENAGA KEPENDIDIKAN</div>
             <div class="cards">
 
-                <button class="add-btn" onclick="openForm()">+ Tambah Data Pendidik</button>
+                <?php if ($isAdmin): ?>
+                    <button class="add-btn" onclick="openForm()">+ Tambah Data Pendidik</button>
+                <?php endif; ?>
 
                 <?php
                 // Inisialisasi counter untuk pembagian container
@@ -148,9 +128,14 @@ if ($resultSekolah && $resultSekolah->num_rows > 0) {
                         echo "<div class='card'>
                         <img src='/upload/" . htmlspecialchars($pendidik['foto']) . "' alt='Foto " . htmlspecialchars($pendidik['nama']) . "'>
                         <div class='name'>" . htmlspecialchars($pendidik['nama']) . "</div>
-                        <div class='position'>" . htmlspecialchars($pendidik['jabatan']) . "</div>
-                        <button class='delete-btn' onclick=\"showDeletePopup('" . $pendidik['id'] . "')\">Hapus</button>
-                    </div>";
+                        <div class='position'>" . htmlspecialchars($pendidik['jabatan']) . "</div>";
+
+                        // Tombol hapus hanya untuk admin
+                        if ($isAdmin) {
+                            echo "<button class='delete-btn' onclick=\"showDeletePopup('" . $pendidik['id'] . "')\">Hapus</button>";
+                        }
+                        
+                        echo "</div>";
 
                         $counter++;
                     }
@@ -164,9 +149,38 @@ if ($resultSekolah && $resultSekolah->num_rows > 0) {
         </div>
     </div>
 
+    <!-- Edit Form -->
+    <div id="edit-form" class="edit-form">
+        <form action="/menu/profile/edit-sekolah.php" method="POST">
+            <h2>Edit Informasi Sekolah</h2>
+            <label for="sejarah">Sejarah</label>
+            <textarea id="sejarah" name="sejarah"><?= htmlspecialchars($sejarah) ?></textarea>
 
+            <label for="alamat">Alamat</label>
+            <input type="text" id="alamat" name="alamat" value="<?= htmlspecialchars($alamat) ?>">
+
+            <label for="telepon">Telepon</label>
+            <input type="text" id="telepon" name="telepon" value="<?= htmlspecialchars($telepon) ?>">
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" value="<?= htmlspecialchars($email) ?>">
+
+            <label for="letak_geografis">Letak Geografis</label>
+            <textarea id="letak_geografis" name="letak_geografis"><?= htmlspecialchars($letak_geografis) ?></textarea>
+
+            <label for="visi">Visi</label>
+            <textarea id="visi" name="visi"><?= htmlspecialchars($visi) ?></textarea>
+
+            <label for="misi">Misi</label>
+            <textarea id="misi" name="misi"><?= htmlspecialchars($misi) ?></textarea>
+
+            <button type="submit" name="update">Update</button>
+            <button type="button" onclick="closeEditForm()">Cancel</button>
+        </form>
+    </div>
+
+    <!-- Popup untuk menghapus -->
     <div class="delete-user" id="delete-user">
-        <!-- Popup -->
         <div class="delete-popup">
             <p>Yakin Untuk Menghapus Data Ini?</p>
             <button class="cancel" onclick="closePopup()">TIDAK</button>
@@ -204,7 +218,6 @@ if ($resultSekolah && $resultSekolah->num_rows > 0) {
     <div id="success-alert" class="alert-success">
         Data berhasil dihapus!
     </div>
-
 
 </body>
 
