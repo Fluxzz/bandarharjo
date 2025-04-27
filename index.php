@@ -1,6 +1,6 @@
 <?php
-include('partials/header.php');
-include('koneksi.php');
+include('/bandarharjo/partials/header.php');
+include('/bandarharjo/koneksi.php');
 
 // Ambil data dari tabel beranda
 $query = "SELECT * FROM beranda";
@@ -13,8 +13,7 @@ if ($result->num_rows > 0) {
   exit;
 }
 ?>
-
-<link rel="stylesheet" href="css/index.css">
+<link rel="stylesheet" href="/css/index.css">
 
 <body>
   <div class="container">
@@ -55,7 +54,7 @@ if ($result->num_rows > 0) {
   </div>
 </body>
 
-<script src="js/edit.js"></script>
+<script src="/js/edit.js"></script>
 <?php
-include('partials/footer.php');
+include('/bandarharjo/partials/footer.php');
 ?>
