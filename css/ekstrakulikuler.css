@@ -1,112 +1,219 @@
 .container {
+  padding: 20px;
+}
+
+.title {
+  font-size: x-large;
+  font-style: italic;
+  font-weight: bold;
+  text-align: center;
+}
+.title:before,
+.title:after {
+  content: "";
+  display: inline-block;
+  width: 100px;
+  height: 2px;
+  background: black;
+  vertical-align: middle;
+  margin: 0 10px;
+}
+
+.card-container {
+  display: flex;
+  border-radius: 20px;
+  justify-content: center;
+  gap: 40px;
+  padding: 30px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+.card .class-name {
+  font-weight: bold;
+  font-size: 15px;
+  word-break: break-word; /* Biar kata panjang banget bisa pecah */
+  white-space: normal; /* Boleh banyak baris */
+}
+
+.card {
+  height: auto; /* Biar tinggi card fleksibel mengikuti isi */
+  min-height: 300px; /* Kasih batas minimal tinggi biar tetap rapi */
+}
+
+
+.card img {
+  width: 100%;
+  height: 180px;
+  background: #d3d3d3;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.card .card-text {
+  display: flex;
+  margin-top: 10px;
+  text-align: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.badge {
+  display: flex;
+  background: #4979d1;
+  color: white;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 10px;
+}
+
+.card .class-name {
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.table-container {
+  margin: auto;
+  margin-bottom: 40px;
+  width: 90%;
+  margin-top: 40px;
+  background-color: whitesmoke;
+  padding: 30px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  box-shadow: -6px 7px 5px -1px rgba(0, 0, 0, 0.3);
+}
+
+table {
+  width: 100%;
+  background: white;
+  border-radius: 15px;
+  border: 1px solid gray;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: center;
+}
+
+th {
+  background-color: #e0e0e0;
+  font-weight: bold;
+}
+
+td:first-child {
+  text-align: left;
+}
+
+td:last-child {
+  text-align: center;
+}
+
+tr:nth-child(even) {
+  background-color: whitesmoke;
+}
+
+.btn-tambah {
+  display: flex;
+  justify-content: center;
+  margin: 20px auto;
+  width: fit-content;
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.btn-tambah:hover {
+  background-color: #218838;
+}
+
+.card-actions {
+  margin-top: 10px;
+}
+
+.card-actions a {
+  display: inline-block;
+  padding: 5px 15px;
+  margin-right: 10px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.btn-edit {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn-edit:hover {
+  background-color: #0056b3;
+}
+
+.btn-hapus {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btn-hapus:hover {
+  background-color: #c82333;
+}
+
+/* ===== MEDIA QUERY ===== */
+@media (max-width: 768px) {
+  .card-container {
+    gap: 20px;
     padding: 20px;
   }
-  
-  .title {
-    font-size: x-large;
-    font-style: italic;
-    font-weight: bold;
-    text-align: center;
+
+  .card {
+    width: 100%;
+    max-width: 300px;
   }
+
+  .table-container {
+    padding: 20px;
+  }
+
+  table {
+    width: 100%;
+    font-size: 14px;
+  }
+
   .title:before,
   .title:after {
-    content: "";
-    display: inline-block;
-    width: 100px;
-    height: 2px;
-    background: black;
-    vertical-align: middle;
-    margin: 0 10px;
+    width: 50px;
   }
+}
+
+@media (max-width: 480px) {
   .card-container {
-    display: flex;
-    border-radius: 20px;
-    justify-content: center;
-    gap: 70px;
-    padding: 50px;
-    flex-wrap: wrap;
-    margin-bottom: 40px;
+    padding: 10px;
   }
+
   .card {
-    background: white;
-    padding: 15px;
-    border-radius: 10px;
-    text-align: center;
-    width: 300px;
-    position: relative;
-    box-shadow: -6px 7px 5px -1px rgba(0,0,0,0.3);
-    -webkit-box-shadow: -6px 7px 5px -1px rgba(0,0,0,0.3);
-    -moz-box-shadow: -6px 7px 5px -1px rgba(0,0,0,0.3);
-  }
-  .card img {
     width: 100%;
-    height: 180px;
-    background: #d3d3d3;
-    border-radius: 10px;
+    max-width: 250px;
   }
-  
-  .card .card-text{
-    display: flex;
-    margin-top: 10px;
-    text-align: center;
-    align-items: center;
-    flex-direction: row;
-    gap: 10px;
-  }
-  
-  .badge {
-    display: flex;
-    background: #4979d1;
-    color: white;
-    font-size: 13px;
-    font-weight: bold;
-    padding: 4px 8px;
-    border-radius: 10px;
-  }
-  .card .class-name {
-    font-weight: bold;
-    font-size: 15px;
-  }
-  
-  .table-container {
-    margin: auto;
-    margin-bottom: 40px;
-    width: 80%;
-    margin-top: 40px;
-    background-color: whitesmoke;
-    padding: 60px;
-    border-radius: 20px;
-    display: flex;
-    justify-content: center;
-    box-shadow: -6px 7px 5px -1px rgba(0,0,0,0.3);
-    -webkit-box-shadow: -6px 7px 5px -1px rgba(0,0,0,0.3);
-    -moz-box-shadow: -6px 7px 5px -1px rgba(0,0,0,0.3);
-  }
+
   table {
-    width: 60%;
-    background: white;
-    border-radius: 15px;
-    border: 1px solid gray;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: 12px;
   }
+
   th, td {
-    border: 1px solid #ddd;
-    padding: 12px;
-    text-align: center;
+    padding: 8px;
   }
-  th {
-    background-color: #e0e0e0;
-    font-weight: bold;
-    text-align: center;
+
+  .title {
+    font-size: large;
   }
-  td:first-child {
-    text-align: left;
-  }
-  td:last-child {
-    text-align: center;
-  }
-  tr:nth-child(even) {
-    background-color: whitesmoke
-  
-  }
+}

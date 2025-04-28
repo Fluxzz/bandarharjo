@@ -77,3 +77,35 @@
     white-space: pre-line;
     margin-left: 3px;
   }
+
+  .btn-tambah {
+    width: fit-content;
+    justify-content: center;
+    margin: 20px auto;
+    display: flex;
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+  }
+  
+  .btn-tambah:hover {
+    background-color: #218838;
+  }
+  
+  .btn-hapus {
+    margin-top: 10px;
+    padding: 6px 12px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .btn-hapus:hover {
+    background-color: #c82333;
+  }
+  

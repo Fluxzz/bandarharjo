@@ -1,5 +1,10 @@
 <?php
-include '/bandarharjo/koneksi.php'; // sesuaikan path jika perlu
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+  }
+  include('/bandarharjo/partials/header.php');
+  include_once('/bandarharjo/authentication/auth-check.php');
+  include('/bandarharjo/koneksi.php');
 
 // Cek apakah parameter keterangan tersedia
 if (!isset($_GET['keterangan'])) {

@@ -1,7 +1,10 @@
 <?php
-session_start();
-include '/bandarharjo/partials/header.php';
-include '/bandarharjo/koneksi.php';
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+  }
+  include('/bandarharjo/partials/header.php');
+  include_once('/bandarharjo/authentication/auth-check.php');
+  include('/bandarharjo/koneksi.php');
 
 // Default kelas
 $kelas = isset($_GET['kelas']) ? $_GET['kelas'] : '1A';

@@ -32,12 +32,10 @@
         <li class="dropdown">
             <a href="javascript:void(0)" class="dropdown-toggle">AKADEMIK <i class="fa-solid fa-angle-down"></i></a>
             <ul class="dropdown-menu">
-                <li><a href="/menu/akademik/kurikulum/kurikulum.php">Kurikulum</a></li>
                 <li><a href="/menu/akademik/kaldik/kaldik.php">Kalender Akademik</a></li>
                 <li><a href="/menu/akademik/ekstrakulikuler/ekstrakulikuler.php">Ekstrakurikuler</a></li>
                 <li><a href="/menu/akademik/prestasi/prestasi.php">Prestasi</a></li>
-                <li><a href="/menu/akademik/e_book/e-book.php">E-Book</a></li>
-                <li><a href="/menu/akademik/media_pembelajaran.php">Media Pembelajaran</a></li>
+                <li><a href="/menu/akademik/e-book/e-book.php">E-Book</a></li>  
             </ul>
         </li>
         <li><a href="/menu/lomba/lomba.php">LOMBA</a></li>

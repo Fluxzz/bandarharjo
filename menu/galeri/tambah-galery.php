@@ -1,6 +1,10 @@
 <?php
-include '../../partials/header.php'; // koneksi database
-include '../../koneksi.php'; // koneksi database
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+  }
+  include('/bandarharjo/partials/header.php');
+  include_once('/bandarharjo/authentication/auth-check.php');
+  include('/bandarharjo/koneksi.php');
 
 if (isset($_POST['submit'])) {
     $judul = $_POST['judul'];

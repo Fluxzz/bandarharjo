@@ -1,7 +1,10 @@
 <?php
-session_start();  // Memulai sesi pengguna
-include('../../partials/header.php');
-include('../../koneksi.php');
+if (session_status() === PHP_SESSION_NONE) {
+  session_start();
+}
+include('/bandarharjo/partials/header.php');
+include_once('/bandarharjo/authentication/auth-check.php');
+include('/bandarharjo/koneksi.php');
 
 // Cek apakah user memiliki peran admin
 $isAdmin = isset($_SESSION['role']) && $_SESSION['role'] == 'admin'; // Menyaring admin

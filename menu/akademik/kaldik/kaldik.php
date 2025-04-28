@@ -1,7 +1,10 @@
 <?php
-session_start();
-include('../../../partials/header.php');
-include('../../../koneksi.php');
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+  }
+  include('/bandarharjo/partials/header.php');
+  include_once('/bandarharjo/authentication/auth-check.php');
+  include('/bandarharjo/koneksi.php');
 
 $kategori = isset($_GET['kategori']) ? $_GET['kategori'] : 'semarang';
 

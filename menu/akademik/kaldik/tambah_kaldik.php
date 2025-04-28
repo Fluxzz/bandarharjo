@@ -1,6 +1,10 @@
 <?php
-// koneksi ke database
-include '../../../koneksi.php';
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+  }
+  include('/bandarharjo/partials/header.php');
+  include_once('/bandarharjo/authentication/auth-check.php');
+  include('/bandarharjo/koneksi.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Mengambil data dari form

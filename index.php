@@ -1,6 +1,9 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+  session_start();
+}
 include('partials/header.php');
+include_once('authentication/auth-check.php');
 include('koneksi.php');
 
 // Cek apakah user sudah login
