@@ -1,10 +1,7 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-  }
-  include('partials/header.php');
-  include_once('authentication/auth-check.php');
-  include('koneksi.php');
+session_start();
+include('/bandarharjo/partials/header.php');
+include('/bandarharjo/koneksi.php');
 
 // Cek jika ID lomba ada di URL
 if (isset($_GET['id'])) {

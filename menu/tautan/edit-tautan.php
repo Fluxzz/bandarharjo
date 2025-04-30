@@ -1,10 +1,7 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-  }
-  include('/bandarharjo/partials/header.php');
-  include_once('/bandarharjo/authentication/auth-check.php');
-  include('/bandarharjo/koneksi.php');
+session_start();
+include('/bandarharjo/partials/header.php');
+include('/bandarharjo/koneksi.php');
 
 // Cek jika ID tautan ada di URL
 if (isset($_GET['id'])) {
@@ -155,7 +152,7 @@ $conn->close();
                     <input type="file" id="foto" name="foto" accept="image/*">
                     <?php if ($row['foto']): ?>
                         <p>Foto Saat Ini:</p>
-                        <img src="<?php echo htmlspecialchars($row['foto']); ?>" alt="Logo <?php echo htmlspecialchars($row['nama']); ?>" width="100">
+                        <img src="/upload/<?php echo htmlspecialchars($row['foto']); ?>" alt="Logo <?php echo htmlspecialchars($row['nama']); ?>" width="100">
                     <?php endif; ?>
                 </div>
                 <div class="form-actions">

@@ -1,9 +1,6 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-  session_start();
-}
+session_start();
 include('partials/header.php');
-include_once('authentication/auth-check.php');
 include('koneksi.php');
 
 // Cek apakah user sudah login
@@ -88,6 +85,10 @@ if ($result->num_rows > 0) {
 </body>
 
 <script src="js/edit.js"></script>
+<script src="js/shortcut.js"></script>
+
+
+
 
 <?php
 include('partials/footer.php');

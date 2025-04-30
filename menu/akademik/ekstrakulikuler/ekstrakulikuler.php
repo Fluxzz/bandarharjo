@@ -1,10 +1,7 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-  }
-  include('/bandarharjo/partials/header.php');
-  include_once('/bandarharjo/authentication/auth-check.php');
-  include('/bandarharjo/koneksi.php');
+session_start();
+include('/bandarharjo/partials/header.php');
+include('/bandarharjo/koneksi.php');
 ?>
 
 <link rel="stylesheet" href="/css/ekstrakulikuler.css">
@@ -57,7 +54,7 @@ if (session_status() === PHP_SESSION_NONE) {
         </div>
     </div>
 </body>
-
+<script src="/js/shortcut.js"></script>
 <?php
 include('/bandarharjo/partials/footer.php');
 ?>

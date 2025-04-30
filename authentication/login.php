@@ -1,14 +1,11 @@
 <?php
 session_start();
 
-// Pastikan BASE_URL terdefinisi
-define('BASE_URL', '/'); // <--- GANTI ini sesuai foldermu, misal '/bandarharjo/'
-
-include_once(__DIR__ . '/../koneksi.php');
+include ('/bandarharjo/koneksi.php');
 
 // Cek jika sudah login
 if (isset($_SESSION['username'])) {
-    header('Location: ' . BASE_URL . 'index.php');
+    header('Location: /index.php');
     exit;
 }
 
@@ -37,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Notifikasi sukses
             $_SESSION['notification'] = ($user['role'] == 'admin') ? 'Anda login sebagai admin' : 'Login sukses';
 
-            header('Location: ' . BASE_URL . 'index.php');
+            header('Location: /index.php');
             exit;
         } else {
             $error_message = "Password salah.";
@@ -54,12 +51,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>css/login.css">
+    <link rel="stylesheet" href="/css/login.css">
 </head>
 <body>
     <div class="login-container">
         <div class="login-box">
-            <img src="<?php echo BASE_URL; ?>assets/bandarharjo.jpeg" alt="Logo" class="login-image"/>
+            <img src="/assets/bandarharjo.jpeg" alt="Logo" class="login-image"/>
             <div class="login-form">
                 <h2>LOGIN</h2>
 

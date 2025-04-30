@@ -1,9 +1,6 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-  session_start();
-}
+session_start();
 include('/bandarharjo/partials/header.php');
-include_once('/bandarharjo/authentication/auth-check.php');
 include('/bandarharjo/koneksi.php');
 
 // Cek apakah user memiliki peran admin
@@ -91,7 +88,6 @@ $beritaResult = $stmtBerita->get_result();
               <?php if ($isAdmin): ?>
                 <!-- Admin dapat menghapus atau mengedit pengumuman -->
                 <button class='delete-btn' onclick="showDeletePopup('<?php echo $pengumuman['id']; ?>')">Hapus</button>
-                <a href="edit-pengumuman.php?id=<?php echo $pengumuman['id']; ?>" class="btn">Edit</a>
               <?php endif; ?>
             </div>
           </div>
@@ -111,7 +107,6 @@ $beritaResult = $stmtBerita->get_result();
               </a>
               <?php if ($isAdmin): ?>
                 <button class='delete-btn' onclick="showDeletePopup('<?php echo $pengumuman['id']; ?>')">Hapus</button>
-                <a href="edit-pengumuman.php?id=<?php echo $pengumuman['id']; ?>" class="btn">Edit</a>
               <?php endif; ?>
             </div>
           </div>
@@ -130,7 +125,6 @@ $beritaResult = $stmtBerita->get_result();
                 <a href="detail-pengumuman.php?id=<?php echo $pengumuman['id']; ?>" class="btn">Baca Selengkapnya >></a>
                 <?php if ($isAdmin): ?>
                   <button class='delete-btn' onclick="showDeletePopup('<?php echo $pengumuman['id']; ?>')">Hapus</button>
-                  <a href="edit-pengumuman.php?id=<?php echo $pengumuman['id']; ?>" class="btn">Edit</a>
                 <?php endif; ?>
               </div>
             </div>
@@ -154,6 +148,7 @@ $beritaResult = $stmtBerita->get_result();
 </body>
 
 <script src="/js/pengumuman.js"></script>
+<script src="/js/shortcut.js"></script>
 
 <?php
 include('../../partials/footer.php');

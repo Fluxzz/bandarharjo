@@ -1,10 +1,7 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-  }
-  include('/bandarharjo/partials/header.php');
-  include_once('/bandarharjo/authentication/auth-check.php');
-  include('/bandarharjo/koneksi.php');
+session_start();
+include('/bandarharjo/partials/header.php');
+include('/bandarharjo/koneksi.php');
 
 // Cek apakah user sudah login dan periksa role admin
 $show_edit_button = false;
@@ -151,5 +148,6 @@ $result = $conn->query($sql);
 </body>
 
 <script src="/js/siswa.js"></script>
+<script src="/js/shortcut.js"></script>
 
 <?php include('/bandarharjo/partials/footer.php'); ?>

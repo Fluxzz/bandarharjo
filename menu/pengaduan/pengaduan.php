@@ -1,9 +1,6 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-  session_start();
-}
+session_start();
 include('/bandarharjo/partials/header.php');
-include_once('/bandarharjo/authentication/auth-check.php');
 include('/bandarharjo/koneksi.php');
 ?>
 
@@ -83,6 +80,7 @@ include('/bandarharjo/koneksi.php');
   </script>
 
 </body>
+<script src="/js/shortcut.js"></script>
 
 </html>
 

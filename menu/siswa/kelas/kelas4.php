@@ -1,10 +1,7 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-  }
-  include('/bandarharjo/partials/header.php');
-  include_once('/bandarharjo/authentication/auth-check.php');
-  include('/bandarharjo/koneksi.php');
+session_start();
+include('/bandarharjo/partials/header.php');
+include('/bandarharjo/koneksi.php');
 
 // Default kelas
 $kelas = isset($_GET['kelas']) ? $_GET['kelas'] : '4A';
@@ -27,7 +24,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $kategori = $_POST['kategori'] ?? $kategori;
 
         if (isset($_POST['nisnLama'])) {
-            // Proses Edit
             $nisnLama = $_POST['nisnLama'];
             $updateQuery = "UPDATE siswa4 SET nama = ?, nisn = ?, kategori = ? WHERE nisn = ?";
             if ($stmt = $conn->prepare($updateQuery)) {
@@ -37,7 +33,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 exit();
             }
         } else {
-            // Proses Tambah
             $insertQuery = "INSERT INTO siswa4 (nama, nisn, kategori) VALUES (?, ?, ?)";
             if ($stmt = $conn->prepare($insertQuery)) {
                 $stmt->bind_param("sss", $nama, $nisn, $kategori);
@@ -50,9 +45,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 // Hapus
-if (isset($_POST['hapus_nisn'])) {
+if (isset($_POST['hapus_nisn']) && isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
     $nisnHapus = $_POST['hapus_nisn'];
-
     $deleteQuery = "DELETE FROM siswa4 WHERE nisn = ?";
     if ($stmt = $conn->prepare($deleteQuery)) {
         $stmt->bind_param("s", $nisnHapus);
@@ -75,7 +69,7 @@ $result = $conn->query($query);
     <div class="navbar-item">
         <div class="navigation">
             <div class="title">
-                <h1>KELAS 4</h1>
+                <h1>KELAS</h1>
             </div>
             <div class="nav-underline"></div>
             <div class="selection">
@@ -87,9 +81,12 @@ $result = $conn->query($query);
     </div>
 
     <div class="table-container">
+        <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
         <div class="tambah-btn">
             <button type="button" onclick="showAddForm()" class="btn-tambah">Tambah Data Siswa</button>
         </div>
+        <?php endif; ?>
+
         <table>
             <thead>
                 <tr>
@@ -105,16 +102,22 @@ $result = $conn->query($query);
                         echo "<tr>
                             <td>" . htmlspecialchars($siswa['nama']) . "</td>
                             <td>" . htmlspecialchars($siswa['nisn']) . "</td>
-                            <td>
+                            <td>";
+                        
+                        if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
+                            echo "
                                 <div class='aksi-buttons'>
                                     <button type='button' class='btn-edit' onclick=\"showEditForm('" . addslashes($siswa['nama']) . "', '" . $siswa['nisn'] . "')\">Edit</button>
                                     <form method='POST' style='display:inline;'>
                                         <input type='hidden' name='hapus_nisn' value='" . htmlspecialchars($siswa['nisn']) . "'>
                                         <button type='submit' class='btn-hapus'>Hapus</button>
                                     </form>
-                                </div>
-                            </td>
-                        </tr>";
+                                </div>";
+                        } else {
+                            echo "-";
+                        }
+
+                        echo "</td></tr>";
                     }
                 } else {
                     echo "<tr><td colspan='3'>Tidak ada data</td></tr>";
@@ -128,6 +131,7 @@ $result = $conn->query($query);
 
 <?php include '/bandarharjo/partials/footer.php'; ?>
 
+<?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
 <!-- Modal Tambah -->
 <div id="addFormContainer" style="display:none;">
     <form method="POST">
@@ -153,12 +157,13 @@ $result = $conn->query($query);
             <input type="text" name="nama" id="editNama" required>
             <label>NISN:</label>
             <input type="text" name="nisn" id="editNISN" required>
-            <input type="hidden" name="kategori" value="<?php echo $kategori; ?>">
             <button type="submit" class="btn-submit">Simpan Perubahan</button>
         </form>
     </div>
 </div>
+<?php endif; ?>
 
 <script src="/js/siswa.js"></script>
+<script src="js/shortcut.js"></script>
 
 </body>

@@ -11,11 +11,6 @@
 
     <div class="right">
         <?php if (!isset($_SESSION['username'])): ?>
-            <a href="/authentication/login.php">
-                <button class="login-btn">
-                    Login
-                </button>
-            </a>
         <?php else: ?>
             <span>Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?>!</span>
             <a href="/authentication/logout.php">
